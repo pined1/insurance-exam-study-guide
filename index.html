@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insurance Exam Study Guide</title>
+<style>
+  :root{
+    --bg:#f5f5f7;
+    --bg-elevated:#ffffff;
+    --bg-inset:#f0f0f2;
+    --text:#1d1d1f;
+    --text-secondary:#6e6e73;
+    --border:rgba(0,0,0,0.08);
+    --accent:#0071e3;
+    --shadow:0 1px 2px rgba(0,0,0,0.04), 0 10px 30px rgba(0,0,0,0.06);
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.06);
+    --radius-lg:22px;
+    --radius-md:16px;
+    --radius-sm:10px;
+    --sidebar-bg:rgba(255,255,255,0.78);
+
+    --trap-bg:#fff4e5;      --trap-border:#ff9f0a; --trap-text:#93450a;
+    --know-bg:#e8f2ff;      --know-border:#0071e3; --know-text:#0b3d78;
+    --num-bg:#e8f8ee;       --num-border:#34c759;  --num-text:#146c34;
+    --final-bg:#fdecec;     --final-border:#ff3b30; --final-text:#7a1410;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#000000;
+      --bg-elevated:#1c1c1e;
+      --bg-inset:#161618;
+      --text:#f5f5f7;
+      --text-secondary:#98989d;
+      --border:rgba(255,255,255,0.1);
+      --shadow:0 1px 2px rgba(0,0,0,0.4), 0 10px 30px rgba(0,0,0,0.5);
+      --shadow-sm:0 1px 3px rgba(0,0,0,0.4);
+      --sidebar-bg:rgba(22,22,24,0.78);
+      --trap-bg:rgba(255,159,10,0.14);  --trap-text:#ffb340;
+      --know-bg:rgba(10,132,255,0.14);  --know-text:#6cb2ff;
+      --num-bg:rgba(52,199,89,0.14);    --num-text:#6cd97e;
+      --final-bg:rgba(255,69,58,0.14);  --final-border:#ff453a; --final-text:#ff8a80;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#000000;
+    --bg-elevated:#1c1c1e;
+    --bg-inset:#161618;
+    --text:#f5f5f7;
+    --text-secondary:#98989d;
+    --border:rgba(255,255,255,0.1);
+    --shadow:0 1px 2px rgba(0,0,0,0.4), 0 10px 30px rgba(0,0,0,0.5);
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.4);
+    --sidebar-bg:rgba(22,22,24,0.78);
+    --trap-bg:rgba(255,159,10,0.14);  --trap-text:#ffb340;
+    --know-bg:rgba(10,132,255,0.14);  --know-text:#6cb2ff;
+    --num-bg:rgba(52,199,89,0.14);    --num-text:#6cd97e;
+    --final-bg:rgba(255,69,58,0.14);  --final-border:#ff453a; --final-text:#ff8a80;
+  }
+
+  *{ box-sizing:border-box; -webkit-font-smoothing:antialiased; }
+  html{ scroll-behavior:smooth; overflow-x:hidden; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+    line-height:1.5;
+    font-size:15.5px;
+    overflow-x:hidden;
+  }
+
+  /* ---------- layout ---------- */
+  .sidebar{
+    position:fixed; top:0; left:0; width:290px; height:100vh;
+    background:var(--sidebar-bg);
+    backdrop-filter:blur(20px) saturate(1.6);
+    -webkit-backdrop-filter:blur(20px) saturate(1.6);
+    border-right:1px solid var(--border);
+    display:flex; flex-direction:column;
+    z-index:100;
+    transition:transform .3s ease;
+  }
+  .sidebar-top{ padding:22px 20px 14px; }
+  .brand{ display:flex; align-items:center; gap:10px; margin-bottom:4px; }
+  .brand-icon{ font-size:22px; }
+  .brand h1{ font-size:17px; font-weight:700; margin:0; letter-spacing:-.01em; }
+  .brand-sub{ font-size:12px; color:var(--text-secondary); margin:2px 0 0 32px; }
+
+  .search-wrap{ padding:0 20px 14px; }
+  .search-wrap input{
+    width:100%; padding:9px 12px; border-radius:10px; border:1px solid var(--border);
+    background:var(--bg-inset); color:var(--text); font-size:13px; outline:none;
+    font-family:inherit;
+  }
+  .search-wrap input::placeholder{ color:var(--text-secondary); }
+  .search-wrap input:focus{ border-color:var(--accent); }
+
+  .sidebar-nav{ flex:1; overflow-y:auto; padding:4px 12px 20px; }
+  .nav-group{ margin-bottom:18px; }
+  .nav-chapter-title{
+    display:flex; align-items:baseline; gap:6px;
+    font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--accent-local, var(--accent)); padding:8px 10px 4px;
+  }
+  .nav-group[data-accent="1"]{ --accent-local:#0071e3; }
+  .nav-group[data-accent="2"]{ --accent-local:#af52de; }
+  .nav-group[data-accent="3"]{ --accent-local:#ff9500; }
+  .nav-link{
+    display:block; padding:8px 10px; margin:1px 0; border-radius:9px;
+    color:var(--text); text-decoration:none; font-size:13.5px;
+    transition:background .15s ease;
+  }
+  .nav-link:hover{ background:var(--bg-inset); }
+  .nav-link.active{
+    background:var(--accent-local, var(--accent));
+    color:#fff; font-weight:600;
+  }
+  .nav-link.hidden{ display:none; }
+
+  .theme-toggle{
+    margin:10px 16px 18px; padding:10px 12px;
+    border:1px solid var(--border); border-radius:12px;
+    background:var(--bg-inset); color:var(--text);
+    font-size:13px; font-weight:600; cursor:pointer; text-align:left;
+    font-family:inherit;
+    display:flex; align-items:center; gap:8px;
+  }
+  .theme-toggle:hover{ background:var(--border); }
+
+  .sidebar-overlay{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:90;
+  }
+  .menu-btn{
+    display:none; position:fixed; top:16px; left:16px; z-index:110;
+    width:40px; height:40px; border-radius:12px; border:1px solid var(--border);
+    background:var(--bg-elevated); color:var(--text); font-size:17px;
+    box-shadow:var(--shadow-sm); cursor:pointer;
+  }
+
+  .content{ margin-left:290px; padding:0 0 100px; }
+  .progress-bar{
+    position:fixed; top:0; left:290px; right:0; height:3px; z-index:120;
+    background:transparent;
+  }
+  .progress-fill{ height:100%; width:0%; background:var(--accent); transition:width .1s linear; }
+
+  /* ---------- hero ---------- */
+  .hero{ max-width:760px; margin:0 auto; padding:70px 32px 40px; text-align:center; }
+  .hero-badge{
+    display:inline-block; font-size:11px; font-weight:700; letter-spacing:.08em;
+    color:var(--accent); background:var(--know-bg); padding:6px 14px; border-radius:20px;
+    margin-bottom:18px; text-transform:uppercase;
+  }
+  .hero h1{ font-size:40px; font-weight:800; letter-spacing:-.02em; margin:0 0 10px; }
+  .hero-sub{ font-size:16px; color:var(--text-secondary); margin:0 0 28px; }
+  .hero-stats{ display:flex; justify-content:center; gap:36px; }
+  .stat{ display:flex; flex-direction:column; align-items:center; }
+  .stat b{ font-size:22px; font-weight:800; }
+  .stat span{ font-size:12px; color:var(--text-secondary); margin-top:2px; }
+
+  /* ---------- chapters ---------- */
+  .chapter{ max-width:760px; margin:0 auto; padding:20px 32px 10px; }
+  .chapter[data-accent="1"]{ --accent-local:#0071e3; }
+  .chapter[data-accent="2"]{ --accent-local:#af52de; }
+  .chapter[data-accent="3"]{ --accent-local:#ff9500; }
+  .chapter-divider{
+    display:flex; align-items:center; gap:14px; margin:50px 0 30px;
+  }
+  .chapter-divider .line{ flex:1; height:1px; background:var(--border); }
+  .chapter-label{
+    font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent-local);
+  }
+  .chapter-title{ font-size:28px; font-weight:800; letter-spacing:-.015em; margin:0 0 8px; }
+  .chapter-desc{ color:var(--text-secondary); font-size:15px; margin:0 0 8px; max-width:600px; }
+
+  .topic{ margin:36px 0 0; scroll-margin-top:24px; }
+  .topic-header{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .topic-index{
+    display:flex; align-items:center; justify-content:center;
+    width:34px; height:34px; border-radius:10px; flex:none;
+    background:var(--accent-local); color:#fff; font-weight:800; font-size:14px;
+  }
+  .topic-title{ font-size:20px; font-weight:750; margin:0; letter-spacing:-.01em; }
+
+  h4{ font-size:14.5px; font-weight:700; margin:22px 0 8px; color:var(--text); }
+  h4 .code{ font-weight:500; }
+  h5{
+    font-size:13.5px; font-weight:700; margin:16px 0 6px; color:var(--text-secondary);
+    padding-left:10px; border-left:3px solid var(--accent-local);
+  }
+  p{ margin:6px 0; color:var(--text); }
+  ul,ol{ margin:6px 0 10px; padding-left:22px; }
+  li{ margin:3px 0; }
+  b,strong{ color:var(--text); }
+  .code{ color:var(--text-secondary); font-size:12.5px; font-weight:500; }
+
+  /* ---------- cards ---------- */
+  .audio-card{
+    display:flex; align-items:center; gap:14px;
+    background:var(--bg-elevated); border:1px solid var(--border);
+    border-radius:var(--radius-md); padding:12px 16px; margin-bottom:18px;
+    box-shadow:var(--shadow-sm);
+  }
+  .audio-card .icon{
+    font-size:18px; width:36px; height:36px; border-radius:10px;
+    background:var(--accent-local); color:#fff;
+    display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .audio-card .meta{ display:flex; flex-direction:column; min-width:98px; flex:none; }
+  .audio-card .meta b{ font-size:12.5px; }
+  .audio-card .meta span{ font-size:10.5px; color:var(--text-secondary); }
+  .audio-card audio{ flex:1; width:100%; height:32px; min-width:0; accent-color:var(--accent-local); }
+
+  .table-wrap{ overflow-x:auto; margin:14px 0 18px; border-radius:var(--radius-sm); border:1px solid var(--border); }
+  table{ width:100%; border-collapse:collapse; font-size:13px; background:var(--bg-elevated); }
+  th,td{ padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+  th{
+    background:var(--bg-inset); font-size:10.5px; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--text-secondary); font-weight:700; white-space:nowrap;
+  }
+  tr:last-child td{ border-bottom:none; }
+
+  .callout{
+    border-radius:var(--radius-md); padding:14px 16px; margin:12px 0;
+    font-size:13.5px; display:flex; gap:10px; align-items:flex-start;
+  }
+  .callout .ci{ font-size:16px; flex:none; line-height:1.3; }
+  .callout .cc{ flex:1; }
+  .callout ul{ margin:6px 0 0; padding-left:18px; }
+  .callout p{ margin:0; }
+  .trap{ background:var(--trap-bg); color:var(--trap-text); }
+  .trap b{ color:var(--trap-text); }
+  .know{ background:var(--know-bg); color:var(--know-text); }
+  .know b{ color:var(--know-text); }
+  .num{ background:var(--num-bg); color:var(--num-text); }
+  .num b{ color:var(--num-text); }
+
+  .final-traps{
+    background:var(--final-bg); border:1px solid var(--final-border);
+    border-radius:var(--radius-lg); padding:22px 24px; margin:20px 0 60px;
+  }
+  .final-traps .topic-index{ background:var(--final-border); }
+  .final-traps .topic-title{ color:var(--final-text); }
+  .final-traps li{ margin-bottom:8px; }
+  .final-traps b{ color:var(--final-text); }
+
+  footer.end{
+    max-width:760px; margin:0 auto; padding:10px 32px 60px;
+    text-align:center; color:var(--text-secondary); font-size:12.5px;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .sidebar{ transform:translateX(-100%); }
+    .sidebar.open{ transform:translateX(0); box-shadow:var(--shadow); }
+    .sidebar.open + .sidebar-overlay{ display:block; }
+    .content{ margin-left:0; }
+    .progress-bar{ left:0; }
+    .menu-btn{ display:block; }
+    .hero{ padding-top:90px; }
+  }
+
+  @media print{
+    .sidebar,.sidebar-overlay,.menu-btn,.progress-bar,.audio-card,.theme-toggle{ display:none !important; }
+    .content{ margin-left:0; }
+    .chapter{ page-break-before:always; }
+  }
+</style>
+</head>
+<body>
+
+<button class="menu-btn" id="menuBtn">&#9776;</button>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <div class="brand"><span class="brand-icon">&#128214;</span><h1>Study Guide</h1></div>
+    <div class="brand-sub">CA Insurance License Exam</div>
+  </div>
+  <div class="search-wrap"><input id="navFilter" type="text" placeholder="Search sections&hellip;"></div>
+  <nav class="sidebar-nav" id="sidebarNav">
+    <div class="nav-group" data-accent="1">
+      <div class="nav-chapter-title">Chapter 1</div>
+      <a class="nav-link" href="#ch1-1">I. Basic Insurance Concepts</a>
+      <a class="nav-link" href="#ch1-2">II. Contract Law</a>
+      <a class="nav-link" href="#ch1-3">III. The Insurance Marketplace</a>
+      <a class="nav-link" href="#ch1-4">IV. Agents, Brokers &amp; Life Settlements</a>
+      <a class="nav-link" href="#ch1-5">V. Nonadmitted, Records &amp; Ethics</a>
+      <a class="nav-link" href="#ch1-6">VI. Insurers &mdash; Classification</a>
+      <a class="nav-link" href="#ch1-7">VII. Trap Summary</a>
+    </div>
+    <div class="nav-group" data-accent="2">
+      <div class="nav-chapter-title">Chapter 2</div>
+      <a class="nav-link" href="#ch2-1">I. Policy Replacement &amp; Cancellation</a>
+      <a class="nav-link" href="#ch2-2">II. Insurable Interest</a>
+      <a class="nav-link" href="#ch2-3">III. Trap Summary</a>
+    </div>
+    <div class="nav-group" data-accent="3">
+      <div class="nav-chapter-title">Chapter 3</div>
+      <a class="nav-link" href="#ch3-1">I. Workers Comp &amp; Medical Expense Reg.</a>
+      <a class="nav-link" href="#ch3-2">II. Long-Term Care &mdash; Core Rules</a>
+      <a class="nav-link" href="#ch3-3">III. Medicare Supplement &amp; LTC Basics</a>
+      <a class="nav-link" href="#ch3-4">IV. LTC Consumer Protection &amp; Ethics</a>
+      <a class="nav-link" href="#ch3-5">V. Trap Summary</a>
+    </div>
+  </nav>
+  <button class="theme-toggle" id="themeToggle">&#127765; Theme: System</button>
+</aside>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<main class="content">
+
+  <header class="hero">
+    <div class="hero-badge">California Insurance License Exam</div>
+    <h1>Study Guide</h1>
+    <p class="hero-sub">Property &amp; Casualty &middot; Personal Lines &middot; Life Insurance &amp; Annuities</p>
+    <div class="hero-stats">
+      <div class="stat"><b>3</b><span>Chapters</span></div>
+      <div class="stat"><b>15</b><span>Sections</span></div>
+      <div class="stat"><b>~21 min</b><span>Audio</span></div>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- CHAPTER 1 -->
+  <!-- ============================================================ -->
+  <section class="chapter" id="chapter-1" data-accent="1">
+    <div class="chapter-divider"><div class="line"></div></div>
+    <div class="chapter-label">Chapter 1</div>
+    <h2 class="chapter-title">Property &amp; Casualty Fundamentals</h2>
+    <p class="chapter-desc">Insurance principles, contract law, the marketplace, producer licensing, and insurer classification.</p>
+
+    <section class="topic" id="ch1-1">
+      <div class="topic-header"><span class="topic-index">I</span><h3 class="topic-title">Basic Insurance Concepts &amp; Principles</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.2 min</span></div>
+        <audio controls preload="none" src="audio/part1.m4a"></audio>
+      </div>
+
+      <h4>1. Definition of Insurance <span class="code">(CIC 22)</span></h4>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc"><b>Insurance = transfer of risk of loss</b> from an individual/business to an insurer, which spreads the cost among many insureds. Without insurance, the loss falls solely on whoever suffered it.</div></div>
+      <p><b>Statutory definition:</b> insurance is "a contract whereby one undertakes to <b>indemnify</b> another against <b>loss, damage, or liability</b> arising from a <b>contingent or unknown event</b>."</p>
+      <p><b>Person</b> (legal) = an entity acting on its own behalf, accepting legal/civil responsibility, contracting in its own name &mdash; individuals, associations, organizations, corporations, partnerships, <b>and trusts</b>.</p>
+
+      <h4>2. Insurable Events <span class="code">(CIC 250)</span></h4>
+      <p>"Any <b>contingent or unknown event, whether past or future</b>, which may <b>damnify</b> a person having an <b>insurable interest</b>, or create a liability against him, may be insured against."</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Predictability rule:</b> the more <b>predictable</b> a loss, the <b>more insurable</b> it becomes; the more <b>unpredictable</b>, the <b>less insurable</b>. Gambling/lottery losses = NOT insurable.</div></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>The law limits only the TYPE of insurable event &mdash; never the dollar amount.</b> Level of indemnification is set by the parties in the contract.</div></div>
+
+      <h4>3. Reinsurance <span class="code">(CIC 620)</span></h4>
+      <p>One insurer indemnifies another for part/all of its liabilities. <b>Purpose:</b> protection against catastrophic losses.</p>
+      <div class="table-wrap"><table>
+      <tr><th>Ceding insurer</th><td>The original company (it <i>cedes</i>/gives away the risk)</td></tr>
+      <tr><th>Assuming insurer</th><td>The reinsurer (takes on the risk)</td></tr>
+      </table></div>
+
+      <h4>4. Classes of Insurance <span class="code">(CIC 100&ndash;120)</span></h4>
+      <p>20 regulatory classes exist. Key definitions for the exam:</p>
+      <div class="table-wrap"><table>
+      <tr><th>Class</th><th>Core definition</th></tr>
+      <tr><td><b>Fire</b></td><td>Fire, lightning, windstorm, tornado, <b>earthquake</b>; all-risk <i>Personal Property Floater</i> covers personal property other than merchandise</td></tr>
+      <tr><td><b>Liability</b></td><td>Injury/property damage to others &mdash; <b>excludes</b> workers comp, common carrier, boiler &amp; machinery, team &amp; vehicle</td></tr>
+      <tr><td><b>Ocean marine</b></td><td>Ships/goods imported or exported <b>by ocean</b>; also covers land/water legs, delay, storage, reshipment</td></tr>
+      <tr><td><b>Inland marine</b></td><td>Movable property/unusual risks on <b>land or air</b>; personal lines = jewelry, fine art, sports/musical equipment; includes hull on <b>pleasure</b> watercraft (non-commercial)</td></tr>
+      <tr><td><b>Automobile</b></td><td>Owners/users/dealers; includes warranty/service contracts</td></tr>
+      <tr><td><b>Title</b></td><td>Guarantees free &amp; clear ownership; covers liens, invalid encumbrances, bad title searches</td></tr>
+      <tr><td><b>Surety</b></td><td>Guaranty of performance of <b>non-insurance</b> contracts; forgery/alteration of instruments/signatures; loss of evidence of debt/deeds/mortgages</td></tr>
+      <tr><td><b>Plate glass</b></td><td>Breakage of glass only</td></tr>
+      <tr><td><b>Workers Comp</b></td><td>Employer liability for employee injury, <b>irrespective of negligence or fault</b></td></tr>
+      <tr><td><b>Common carrier liability</b></td><td>Carrier's liability for accident/injury &mdash; excludes workers comp</td></tr>
+      <tr><td><b>Boiler &amp; machinery</b></td><td>Explosion/accident: boilers, tanks, pipes, engines, electrical machinery</td></tr>
+      <tr><td><b>Burglary</b></td><td>Theft of money, securities, valuable papers, business records &mdash; <b>excludes</b> property with a carrier for hire or in the mail</td></tr>
+      <tr><td><b>Credit</b></td><td>Loss to businesses from customers failing to meet obligations</td></tr>
+      <tr><td><b>Sprinkler</b></td><td>Water damage from breakage/leakage of sprinklers/pumps/pipes (or fire from that leakage)</td></tr>
+      <tr><td><b>Team and vehicle</b></td><td>Vehicles other than ships, boats, railroad; damage/theft coverage</td></tr>
+      <tr><td><b>Mortgage</b></td><td>Guarantees payment of principal/interest on a note/bond</td></tr>
+      <tr><td><b>Mortgage guaranty</b></td><td>Covers nonpayment loss under note/bond/deed of trust on real estate</td></tr>
+      <tr><td><b>Aircraft</b></td><td>Owners/users/dealers &mdash; excludes accident/injury to a natural person</td></tr>
+      <tr><td><b>Insolvency</b></td><td>Failure of an insolvent insurer to pay claims</td></tr>
+      <tr><td><b>Legal</b></td><td>Reimburses attorney fees/costs (attorney must be active bar member)</td></tr>
+      <tr><td><b>Miscellaneous</b></td><td>Direct/indirect lightning/windstorm/tornado/earthquake damage; production-interruption open policies; catch-all for anything else</td></tr>
+      </table></div>
+
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">
+      <b>Top traps &mdash; Part I:</b>
+      <ul>
+      <li>"Transfer of risk" is THE one-line answer for defining insurance.</li>
+      <li><b>Liability's four exclusions:</b> workers comp, common carrier, boiler &amp; machinery, team &amp; vehicle.</li>
+      <li>Ceding insurer (gives risk away) vs. assuming insurer (reinsurer, takes risk on).</li>
+      <li>Law caps the <b>type</b> of insurable event, never the dollar amount.</li>
+      <li>Ocean marine = sea import/export; inland marine = land/air movable property + pleasure watercraft hull.</li>
+      <li>Workers Comp = no-fault (irrespective of negligence).</li>
+      <li>Burglary excludes property with a carrier for hire or in the mail.</li>
+      <li>Earthquake appears under BOTH Fire and Miscellaneous.</li>
+      </ul>
+      </div></div>
+    </section>
+
+    <section class="topic" id="ch1-2">
+      <div class="topic-header"><span class="topic-index">II</span><h3 class="topic-title">Contract Law</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.2 min</span></div>
+        <audio controls preload="none" src="audio/part2.m4a"></audio>
+      </div>
+
+      <h4>1. The Insurance Policy <span class="code">(CIC 380)</span></h4>
+      <p>The <b>insurance policy</b> = the <i>written instrument</i> setting forth the contract of insurance.</p>
+
+      <h4>2. Six Required Specifications <span class="code">(CIC 381)</span></h4>
+      <div class="table-wrap"><table>
+      <tr><th>#</th><th>Element</th></tr>
+      <tr><td>1</td><td>The parties to the contract</td></tr>
+      <tr><td>2</td><td>The persons/property insured</td></tr>
+      <tr><td>3</td><td>Statement of insurable interest (if insured &ne; owner)</td></tr>
+      <tr><td>4</td><td>The risks insured against</td></tr>
+      <tr><td>5</td><td>The time period the policy is in force</td></tr>
+      <tr><td>6</td><td>The premium (stated, or method of calculation if determinable only at termination)</td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Trap:</b> An insurer's <b>financial rating is NOT required</b> to appear in the policy &mdash; common "which is NOT required" question.</div></div>
+
+      <h4>3. Key Legal Terms &amp; Distinctions</h4>
+      <div class="table-wrap"><table>
+      <tr><th>Term</th><th>Definition</th><th>Intent required?</th><th>Effect</th></tr>
+      <tr><td><b>Representation</b></td><td>Statement believed true (not guaranteed) &mdash; insured's answers on application</td><td>N/A</td><td>Can be withdrawn/changed <b>before</b> policy effective, not after</td></tr>
+      <tr><td><b>Misrepresentation</b></td><td>An untrue representation</td><td>No</td><td>Void contract if <b>material</b></td></tr>
+      <tr><td><b>Fraud</b></td><td>Intentional misrepresentation/concealment of a material fact to induce a contract or deceive</td><td><b>Yes</b></td><td>Void contract; may be criminal</td></tr>
+      <tr><td><b>Concealment</b></td><td>Withholding known material information</td><td>No &mdash; voids regardless of intent</td><td>May void policy; rescission allowed</td></tr>
+      <tr><td><b>Warranty</b></td><td>Statement guaranteed true, becomes part of contract (express or implied)</td><td>N/A</td><td>Breach of material warranty &rarr; rescission; immaterial breach does not void policy unless specified</td></tr>
+      <tr><td><b>Materiality</b></td><td>"Probable and reasonable influence" the fact would have on the party's decision</td><td>&mdash;</td><td>Determines if misrep/concealment/warranty breach voids contract</td></tr>
+      <tr><td><b>Rescission</b></td><td>Revocation of the contract</td><td>&mdash;</td><td>Insurer refunds all premiums; insured loses claim rights</td></tr>
+      </table></div>
+
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">
+      <b>Key distinctions to memorize:</b>
+      <ul>
+      <li>Fraud = misrepresentation that is <b>both material AND intentional</b>. Misrepresentation alone &ne; fraud.</li>
+      <li>Concealment can void a policy <b>even if unintentional</b> &mdash; unlike fraud.</li>
+      <li>A representation can be withdrawn/changed only <b>before</b> the policy takes effect &mdash; not after.</li>
+      <li><b>CIC 354:</b> a representation cannot qualify an <i>express</i> warranty, but CAN qualify an <i>implied</i> warranty.</li>
+      <li>Neither party must disclose personal <b>opinions/judgment</b> &mdash; only facts.</li>
+      </ul>
+      </div></div>
+
+      <h5>Warranty Details (CIC 440&ndash;449)</h5>
+      <ul>
+      <li>No special wording needed to create a warranty.</li>
+      <li><b>Express warranty</b> = written in policy &rarr; automatically part of contract.</li>
+      <li><b>Implied warranty</b> = unwritten, presumed from circumstances.</li>
+      <li>Created at or before execution; <b>not limited by time</b> (past, present, future, or combination).</li>
+      </ul>
+
+      <h5>Concealment &mdash; what does NOT need to be disclosed (CIC 330&ndash;339)</h5>
+      <ul>
+      <li>Known information / information that should be known</li>
+      <li>Information the other party waives</li>
+      <li>Information excluded by a warranty and not material to the risk</li>
+      <li>Information excepted from insurance and not material to the risk</li>
+      <li>Information based on personal judgment</li>
+      </ul>
+
+      <h5>Materiality (CIC 334)</h5>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc"><b>Disadvantages are always material information.</b> Producers must disclose disadvantages (surrender charges, exclusions like war/terrorism/aviation/suicide, term length, premium increases, fees, substandard ratings) &mdash; not just advantages.</div></div>
+      <p>Example: concealing a recent <b>heart attack</b> has greater materiality impact than misstating age by 5 years &mdash; materiality is about impact on the decision, not the type of fact.</p>
+
+      <h5>Representations &amp; Misrepresentations (CIC 350&ndash;361, 780&ndash;784)</h5>
+      <p>A representation is <b>false</b> when the facts fail to correspond with its assertions. A <b>material misrepresentation</b> would alter the underwriting decision if discovered. If material AND intentional &rarr; fraud.</p>
+
+      <h4>4. Rescission <span class="code">(CIC 331, 338, 359, 447)</span></h4>
+      <p>An injured party may rescind for:</p>
+      <ol>
+      <li>A <b>false material representation</b> (effective from when the representation became false)</li>
+      <li><b>Concealment</b> (regardless of intent)</li>
+      <li>Violation of a <b>material warranty</b> or other material provision</li>
+      </ol>
+      <p><b>Burden of proof:</b> insurer must prove the omission was intentional AND done to obtain insurance fraudulently.</p>
+
+      <h4>5. Fraud Penalties</h4>
+      <div class="table-wrap"><table>
+      <tr><th></th><th>Penal Code &sect;550 (felony)</th><th>CIC 782 (misdemeanor)</th></tr>
+      <tr><td>Jail/prison</td><td>1 yr county <b>or</b> 2/3/5 yrs state prison</td><td>Up to 1 yr county jail</td></tr>
+      <tr><td>Fine</td><td>Up to <b>$150,000</b> or <b>2&times; fraud value</b>, whichever greater</td><td>Up to <b>$25,000</b> (capped at 3&times; loss if loss &gt;$10,000)</td></tr>
+      <tr><td>Extra</td><td>2 priors &rarr; no probation; +2 yrs/prior conviction</td><td>Commissioner may suspend license up to <b>3 years</b></td></tr>
+      </table></div>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc">All claim/notice forms must carry CA's fraud-warning statement &mdash; <b>except reinsurance policies</b> (insurer-to-insurer transactions).</div></div>
+      <p>Health care fraud estimate: 3&ndash;10% of costs, conservatively <b>&gt;$53 billion/year</b> (Coalition Against Insurance Fraud).</p>
+    </section>
+
+    <section class="topic" id="ch1-3">
+      <div class="topic-header"><span class="topic-index">III</span><h3 class="topic-title">The Insurance Marketplace &mdash; Distribution &amp; Producers</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.1 min</span></div>
+        <audio controls preload="none" src="audio/part3.m4a"></audio>
+      </div>
+
+      <h4>1. Distribution Systems</h4>
+      <div class="table-wrap"><table>
+      <tr><th>System</th><th>Represents</th><th>Exclusive?</th><th>Renewal ownership</th></tr>
+      <tr><td><b>Independent Agency</b></td><td>Several insurers</td><td>No</td><td>Agent <b>owns the renewal/expiration</b> &mdash; can move client</td></tr>
+      <tr><td><b>Exclusive/Captive/Career</b></td><td>One insurer</td><td>Yes</td><td>Renewals stay with that insurer only</td></tr>
+      <tr><td><b>General Agency</b></td><td>One insurer</td><td>Yes</td><td>GA appoints subagents</td></tr>
+      <tr><td><b>Managerial</b></td><td>One insurer, branch manager supervises</td><td>&mdash;</td><td>Salaried; agents may be employees or ICs</td></tr>
+      <tr><td><b>Direct Response</b></td><td>No agents</td><td>&mdash;</td><td>Consumer applies directly</td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Direct Response vs. Home Service (opposites):</b><br>
+      Direct response = mass-marketed (mail/TV/print), <b>client initiates contact</b>, low benefit/low premium.<br>
+      Home service (industrial life) = agent sells <b>and collects premium in person, weekly</b>; face amount usually &le; <b>$2,000</b>; targets unsophisticated buyers.</div></div>
+
+      <h4>2. Producer Licensing</h4>
+      <p><b>"Transacting insurance"</b> = soliciting, negotiating, executing, or handling resulting transactions.</p>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc">Unlicensed transacting = <b>misdemeanor</b>, up to <b>$50,000 fine</b> and/or <b>1 year county jail</b>.</div></div>
+      <div class="table-wrap"><table>
+      <tr><th>License</th><th>Covers</th></tr>
+      <tr><td><b>Insurance agent</b> (general CA term)</td><td>All classes except life/disability/health</td></tr>
+      <tr><td><b>Life agent</b></td><td>Endowments, annuities, accidental death/dismemberment, disability income</td></tr>
+      <tr><td><b>A&amp;H/sickness agent</b></td><td>Sickness, bodily injury, accidental death, disability income, 24-hr coverage</td></tr>
+      <tr><td><b>Property &amp; Casualty</b></td><td>Auto, personal watercraft, residential (incl. earthquake &amp; flood), inland marine, umbrella/excess liability</td></tr>
+      <tr><td><b>Personal Lines</b></td><td>Narrower P&amp;C: personal auto, personal-property inland marine, residential, umbrella only</td></tr>
+      <tr><td><b>Limited Lines Auto</b></td><td>Auto liability, physical damage, collision only</td></tr>
+      <tr><td><b>Surplus Line broker</b></td><td><b>Only</b> license allowed to deal with nonadmitted insurers &mdash; only after a diligent search shows no admitted insurer will write it</td></tr>
+      </table></div>
+
+      <h4>3. Federal Prohibited Persons <span class="code">(18 U.S.C. &sect;&sect;1033&ndash;1034)</span></h4>
+      <p>Applies to insurance business affecting interstate commerce.</p>
+      <div class="table-wrap"><table>
+      <tr><th>Violation</th><th>Penalty</th></tr>
+      <tr><td>Knowing false material statements</td><td>Fine and/or <b>up to 10 yrs</b></td></tr>
+      <tr><td>...if it jeopardized insurer's security</td><td>Up to <b>15 yrs</b></td></tr>
+      <tr><td>Felon (dishonesty/breach of trust) working without consent</td><td>Up to <b>5 yrs</b></td></tr>
+      <tr><td>Embezzlement &lt; $5,000</td><td>Reduced to <b>1 yr</b></td></tr>
+      <tr><td>&sect;1033 civil penalty (AG-brought, federal court)</td><td><b>$50,000/violation</b> or amount of compensation, whichever greater</td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Trap:</b> Four different numbers &mdash; 10 yrs (false statements), 15 yrs (jeopardized insurer), 5 yrs (felon w/o consent), 1 yr (embezzlement &lt;$5,000). Don't mix them up.</div></div>
+      <p><b>1033 waiver</b> = written consent from a state insurance official letting a disqualified felon work in insurance &mdash; must specifically cite 18 U.S.C. 1033.</p>
+    </section>
+
+    <section class="topic" id="ch1-4">
+      <div class="topic-header"><span class="topic-index">IV</span><h3 class="topic-title">Agents, Brokers &amp; Life Settlements</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.1 min</span></div>
+        <audio controls preload="none" src="audio/part4.m4a"></audio>
+      </div>
+
+      <h4>1. Agents vs. Brokers</h4>
+      <div class="table-wrap"><table>
+      <tr><th></th><th>Agent</th><th>Broker</th></tr>
+      <tr><td>Represents</td><td><b>Insurer</b></td><td><b>Client</b></td></tr>
+      <tr><td>Life/health?</td><td>Yes</td><td><b>No</b> &mdash; no such license as "life broker"/"health broker"</td></tr>
+      <tr><td>Paid by</td><td>Commission (insurer)</td><td>Typically a fee from client</td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">Taking both a client fee AND an insurer commission on one deal = potentially unethical.</div></div>
+
+      <h4>2. Life Settlements</h4>
+      <p><b>Life settlement</b> = selling a no-longer-needed policy to a third party for cash. Seller's life expectancy must be <b>more than 1 year</b> (distinguishes from viatical settlements, for the terminally ill).</p>
+      <div class="table-wrap"><table>
+      <tr><th>Term</th><th>Definition</th></tr>
+      <tr><td><b>Qualified Institutional Buyer</b></td><td>Owns/invests <b>&ge;$100 million</b> in securities; SEC-permitted to trade unregistered securities</td></tr>
+      <tr><td><b>Life Expectancy</b></td><td>Arithmetic mean of projected months to live, based on medical history/mortality</td></tr>
+      <tr><td><b>Life Settlement Broker</b></td><td>Fiduciary to the <b>owner only</b>; excludes licensed providers, attorneys, accountants, financial planners</td></tr>
+      <tr><td><b>Financing Entity</b></td><td>Accredited investor providing funds for settlement contract purchase, in writing</td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>NOT a life settlement contract:</b> policy loans, bank loans, collateral assignments, agreements between close relatives, bona fide business succession, employer-owned key-employee insurance, service-recipient/provider agreements.</div></div>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc"><b>Licensing:</b> 15 hrs CE + $171 fee (1-yr) &mdash; <b>OR</b>, if already a life agent &ge;1 year: notify CDI within <b>10 days</b>, pay <b>$85</b> notification fee, renew biennially.</div></div>
+
+      <h4>3. Acting Without Appointment</h4>
+      <ul>
+      <li>Insurer requires all agents appointed (captive) &rarr; unappointed agent <b>can't</b> solicit/submit applications.</li>
+      <li>Insurer doesn't require it &rarr; unappointed agent <b>can</b> present proposals; client payments go to the <b>insurer</b>, not agent; if a policy issues, insurer is deemed to have appointed the agent and must file notice with the Commissioner <b>within 14 days</b>.</li>
+      </ul>
+
+      <h4>4. Solicitors</h4>
+      <ul>
+      <li>Assists a P&amp;C agent/broker with <b>non-life/disability/health</b> insurance.</li>
+      <li><b>Cannot</b> simultaneously hold an agent/broker license.</li>
+      <li>Can work for multiple producers at once.</li>
+      </ul>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>"Life solicitor" and "accident &amp; health solicitor" are NOT real licenses</b> (CIC 1704) &mdash; heavily tested.</div></div>
+
+      <h4>5. Agent's Errors &amp; Omissions (E&amp;O) Insurance</h4>
+      <ul>
+      <li>Covers negligent <b>errors</b> (done wrong) or <b>omissions</b> (not done). Highest-risk moments: <b>sales interview &amp; policy delivery</b>.</li>
+      <li><b>Claims-made</b> (modern trend) vs. <b>occurrence</b> (older, requires insured's consent for out-of-court settlement).</li>
+      <li>Deductibles usually <b>$500&ndash;$1,000 per claim</b>; renews annually.</li>
+      </ul>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Not covered:</b> criminal acts, unfair trade practices, material misrepresentation causing loss. If a claim results in a <b>criminal conviction</b>, E&amp;O won't pay; agent stays personally liable.</div></div>
+    </section>
+
+    <section class="topic" id="ch1-5">
+      <div class="topic-header"><span class="topic-index">V</span><h3 class="topic-title">Nonadmitted Insurers, Records, License Lifecycle &amp; Ethics</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.2 min</span></div>
+        <audio controls preload="none" src="audio/part5.m4a"></audio>
+      </div>
+
+      <h4>1. Nonadmitted Insurers &amp; Surplus Lines <span class="code">(CIC 703)</span></h4>
+      <p>Nonadmitted insurer = not licensed/present in CA; represented only via <b>surplus lines brokers</b>.</p>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc">Unlicensed acts on behalf of a nonadmitted insurer = misdemeanor + <b>$500 fine + $100/month</b> continuing violation.</div></div>
+
+      <h4>2. Free Insurance Ban <span class="code">(CIC 777.1)</span></h4>
+      <p>Illegal to give free insurance as an incentive for other business &rarr; up to <b>1-year</b> suspension/revocation.</p>
+      <p><b>Exceptions:</b> newspaper subscriptions, credit union shares, product-performance guarantees, title/life/disability insurance paying off debt on death/disability, attorney services, motor club services (towing, roadside, bail bond, DMV).</p>
+
+      <h4>3. Names, Advertising, Records</h4>
+      <div class="table-wrap"><table>
+      <tr><th>Rule</th><th>Number</th></tr>
+      <tr><td>Max fictitious names per licensee</td><td><b>2</b> (+2 more if acquiring another licensed business)</td></tr>
+      <tr><td>Address change notice</td><td><b>Immediately</b></td></tr>
+      <tr><td>Report convictions/admin actions</td><td>Within <b>30 days</b> of final disposition</td></tr>
+      <tr><td>License renewal cycle</td><td><b>2 years</b>; <b>60-day</b> grace period (if paperwork/fee submitted by expiration)</td></tr>
+      <tr><td>License # size on materials</td><td>At least as large as smallest address/phone on the doc</td></tr>
+      <tr><td>License # violation fines</td><td><b>$200 / $500 / $1,000</b> (1st/2nd/3rd offense)</td></tr>
+      <tr><td>Records retention (life/disability agents)</td><td><b>5 years</b>, available within <b>30 days</b> of DOI request</td></tr>
+      <tr><td>Effective-date disclosure (CIC 1730.5)</td><td><b>Personal lines only</b></td></tr>
+      </table></div>
+      <p>Disapproved name words include: <i>advisor, analyst, assurance company, department, government, investment, national, state, trust, underwriter</i> / <i>affordable, cash, cheap, discount, elder, expert, legal, protection, secure, specialist.</i></p>
+
+      <h4>4. Fiduciary Duty &amp; MGAs</h4>
+      <p>Diverting fiduciary funds = <b>theft</b>. Producer must remit premiums (minus commission) and hold funds in a <b>separate trustee account</b>.</p>
+      <p><b>MGA</b> = negotiates ceding reinsurance / manages insurance business as insurer's agent.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>NOT an MGA:</b> insurer's employee, US manager of an alien insurer's branch, underwriting manager not paid on premium volume, attorney-in-fact for a reciprocal insurer.</div></div>
+
+      <h4>5. Appointment Rules</h4>
+      <ul>
+      <li>Insurer must file notice of appointment <b>within 14 days</b>; licensee becomes legal / insurer becomes liable <b>as of the date the insurer signs</b>.</li>
+      <li><b>Inactive license</b> (no appointments) &ne; lost license &mdash; reactivates on next appointment.</li>
+      <li>Licensee may surrender license anytime (CIC 1708).</li>
+      </ul>
+
+      <h4>6. License Denial / Suspension / Termination</h4>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc"><b>No-hearing denial</b> (exactly 4 conditions): felony conviction, misdemeanor insurance-law violation, license denial in past 5 yrs, license suspension/revocation in past 5 yrs.</div></div>
+      <ul>
+      <li>"Convicted" includes <b>nolo contendere</b> (no contest) pleas.</li>
+      <li><b>All convictions must be disclosed</b>, even if dismissed/expunged/probated &mdash; failure to disclose = automatic denial.</li>
+      <li>Cheating on the license exam &rarr; barred from exams/active license for <b>5 years</b>.</li>
+      <li>License auto-terminates on death, org dissolution, or partner changes (unless filed within <b>30 days</b>).</li>
+      </ul>
+
+      <h4>7. Continuing Education</h4>
+      <ul>
+      <li><b>24 hours per 2-year term</b>, incl. <b>3 hours ethics</b> (Life, A&amp;H, Property, Casualty, Personal Lines).</li>
+      <li>Multi-license holders: one set of CE satisfies all held license types.</li>
+      <li>Carryover: only <b>2nd-year</b> hours carry over, capped at the renewal requirement.</li>
+      <li><b>Exempt:</b> 30 continuous years licensed in CA <b>and</b> age 70+.</li>
+      <li><b>LTC training:</b> 8 hrs/year for first 4 years, then 8 hrs/2-year term (counted <b>within</b>, not added to, overall CE).</li>
+      </ul>
+
+      <h4>8. Ethics</h4>
+      <p>Client's interest first; competence; needs-based recommendations; plain language; confidentiality; obey the law; no unfair competitor remarks.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Conflict of interest:</b> recommending what benefits the agent's commission over the client, or what the agent wouldn't choose for themselves.<br>
+      Prohibited: misrepresentation, twisting, concealment, diverting/commingling client funds (<b>commingling is a violation regardless of intent</b>).</div></div>
+    </section>
+
+    <section class="topic" id="ch1-6">
+      <div class="topic-header"><span class="topic-index">VI</span><h3 class="topic-title">Insurers &mdash; Classification</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.1 min</span></div>
+        <audio controls preload="none" src="audio/part6.m4a"></audio>
+      </div>
+
+      <h4>1. Admitted vs. Nonadmitted <span class="code">(CIC 24-25)</span></h4>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc"><b>Certificate of Authority</b> required before transacting business in CA &mdash; applies to domestic, foreign, AND alien insurers alike.</div></div>
+      <p>Nonadmitted business limited to: reinsurance of an admitted insurer, marine/navigation perils, aircraft/spacecraft, interstate railroad property &mdash; <b>only via a surplus lines broker</b>.</p>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc">Penalty for transacting without a Certificate of Authority: up to <b>$100,000 fine</b> and/or <b>1 year county jail</b>.</div></div>
+
+      <h4>2. Domestic / Foreign / Alien <span class="code">(CIC 26-27, 1580)</span></h4>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc"><b>Domicile = where incorporated, not where it does business.</b></div></div>
+      <div class="table-wrap"><table>
+      <tr><th>Type</th><th>Meaning</th></tr>
+      <tr><td><b>Domestic</b></td><td>Incorporated in <b>this state</b></td></tr>
+      <tr><td><b>Foreign</b></td><td>Incorporated in another state, D.C., or a <b>U.S. territory</b></td></tr>
+      <tr><td><b>Alien</b></td><td>Incorporated <b>outside the U.S.</b></td></tr>
+      </table></div>
+      <p>5 U.S. territories (still "foreign," not alien): American Samoa, Guam, Northern Mariana Islands, Puerto Rico, U.S. Virgin Islands.</p>
+
+      <h4>3. Stock vs. Mutual</h4>
+      <div class="table-wrap"><table>
+      <tr><th></th><th>Stock</th><th>Mutual</th></tr>
+      <tr><td>Owned by</td><td>Stockholders</td><td>Policyowners</td></tr>
+      <tr><td>Policy type</td><td><b>Nonparticipating</b></td><td><b>Participating</b></td></tr>
+      <tr><td>Dividends to policyowners?</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Dividend tax treatment</td><td>Stockholder dividends <b>taxable</b></td><td>Policyowner dividends <b>nontaxable</b> (return of excess premium)</td></tr>
+      </table></div>
+    </section>
+
+    <div class="final-traps topic" id="ch1-7">
+      <div class="topic-header"><span class="topic-index">VII</span><h3 class="topic-title">Highest-Yield Trap Summary</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~0.9 min</span></div>
+        <audio controls preload="none" src="audio/part7.m4a"></audio>
+      </div>
+      <ul>
+      <li><b>Insurance = transfer of risk</b> &mdash; the one-line definition.</li>
+      <li><b>Fraud</b> (material + intentional) vs. <b>concealment</b> (no intent needed) vs. <b>misrepresentation</b> (neither required, but must be material to void).</li>
+      <li>Fraud penalties: <b>$150K/felony</b> (Penal Code &sect;550) vs. <b>$25K/misdemeanor</b> (CIC 782) &mdash; don't swap these.</li>
+      <li>The insurance code caps the <b>type</b> of insurable event, never the loss amount.</li>
+      <li>Liability insurance <b>excludes</b>: workers comp, common carrier, boiler &amp; machinery, team &amp; vehicle.</li>
+      <li>Ocean marine (by sea) vs. inland marine (land/air + pleasure watercraft hull).</li>
+      <li>Ceding insurer (gives risk) vs. assuming insurer (reinsurer, takes risk).</li>
+      <li><b>Agent</b> represents insurer; <b>broker</b> represents client &mdash; no such thing as a "life broker" license.</li>
+      <li><b>"Life solicitor" / "accident &amp; health solicitor" are NOT real licenses.</b></li>
+      <li><b>Surplus line broker</b> is the only license type allowed to place business with nonadmitted insurers.</li>
+      <li>The four <b>no-hearing license denial</b> conditions: felony conviction, misdemeanor insurance-law violation, license denial in past 5 yrs, suspension/revocation in past 5 yrs.</li>
+      <li><b>Domicile = place of incorporation</b>, never place of business.</li>
+      <li><b>Stock/nonparticipating</b> (taxable stockholder dividends) vs. <b>Mutual/participating</b> (nontaxable policyowner dividends).</li>
+      <li>CE: <b>24 hrs / 2-year term incl. 3 hrs ethics</b>; carryover only from the 2nd year, capped at the renewal requirement.</li>
+      <li>Appointment: insurer has <b>14 days</b> to file notice; liability attaches on the <b>signature date</b>, not the filing date.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CHAPTER 2 -->
+  <!-- ============================================================ -->
+  <section class="chapter" id="chapter-2" data-accent="2">
+    <div class="chapter-divider"><div class="line"></div></div>
+    <div class="chapter-label">Chapter 2</div>
+    <h2 class="chapter-title">Life Insurance &amp; Annuities</h2>
+    <p class="chapter-desc">Policy replacement and cancellation rules, plus insurable interest.</p>
+
+    <section class="topic" id="ch2-1">
+      <div class="topic-header"><span class="topic-index">I</span><h3 class="topic-title">Policy Replacement &amp; Cancellation</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.8 min</span></div>
+        <audio controls preload="none" src="audio/ch2_part1.m4a"></audio>
+      </div>
+
+      <h4>1. Free-Look / Right to Cancel</h4>
+      <p>Every individual life policy or annuity must state on the cover page/policy that the owner can return it within a set period for a <b>full refund, no questions asked</b>. Rescission means the policy is treated as if it <b>never existed</b>.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Clock starts</b> when the policy is <b>received and signed for by the owner</b> (Acknowledgment of Delivery Receipt) &mdash; <b>NOT</b> when the application was signed or the policy was underwritten.</div></div>
+
+      <div class="table-wrap"><table>
+      <tr><th>Trigger</th><th>Free-look period</th><th>Refund</th></tr>
+      <tr><td>Standard individual life policy</td><td><b>At least 10 days</b>; insurer may extend up to <b>30 days</b> (never less than 10)</td><td>Full premium refund</td></tr>
+      <tr><td><b>Replacement</b> policy</td><td><b>Minimum 30 days</b></td><td>Full refund</td></tr>
+      <tr><td>Insured/annuitant <b>age 60+</b></td><td><b>30 days</b></td><td>Full refund</td></tr>
+      <tr><td>Variable life/annuity</td><td>30 days</td><td><b>Account value + policy fees</b> (could be less than premium paid)</td></tr>
+      <tr><td>Insurer's deadline to refund after rescission notice</td><td>&mdash;</td><td>Must pay within <b>30 days</b></td></tr>
+      </table></div>
+
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">
+      <b>Traps:</b>
+      <ul>
+      <li>Free-look does <b>NOT</b> apply to <b>term conversions</b> or <b>credit life policies</b>.</li>
+      <li>The <b>10&ndash;30 day range</b> is for standard policies; <b>30 days flat</b> is required for <b>replacements</b> and <b>age 60+</b> policies.</li>
+      <li>Variable products refund <b>account value</b> (can be <i>less</i> than premiums paid) &mdash; non-variable refunds are the <b>full premium</b>.</li>
+      <li>After the free-look period expires, cancellation may trigger a <b>surrender charge</b> (not automatically refundable).</li>
+      </ul>
+      </div></div>
+
+      <h5>Age 60+ Notice Requirement</h5>
+      <ul>
+      <li>Must appear on cover page/policy jacket in <b>12-point bold</b>, with <b>1-inch margin on all sides</b>, or on an affixed sticker.</li>
+      <li>Applies to individual life policies/annuities &mdash; <b>excludes variable contracts and modified guaranteed contracts</b>.</li>
+      <li>The phrase "known as a surrender charge" may be <b>omitted if no surrender charges exist</b>.</li>
+      </ul>
+
+      <h4>2. Replacement Rules <span class="code">(CIC 10509&ndash;10509.09)</span></h4>
+      <p><b>Replacement</b> = purchasing a new individual life/annuity contract that causes an <b>existing policy with another insurer</b> to be lapsed, surrendered, terminated, forfeited, converted (e.g., a nonforfeiture option), or have benefits reduced.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">Replacement rules apply whether the agent <b>knows for sure OR should reasonably suspect</b> replacement is occurring &mdash; suspicion alone triggers the duty.</div></div>
+
+      <div class="table-wrap"><table>
+      <tr><th>Requirement</th><th>Detail</th></tr>
+      <tr><td>Signed statements at application</td><td>Client confirms intent to replace; <b>agent</b> signs a statement on their knowledge/suspicion of replacement</td></tr>
+      <tr><td><b>"Notice Regarding Replacement of Life Insurance"</b></td><td>Separate disclosure, signed by client <b>and</b> agent at application time; often a <b>triplicate</b> form: client keeps a copy, one goes with the application, agent/branch may keep the third</td></tr>
+      <tr><td>New insurer &rarr; old insurer</td><td>Must send a copy of the disclosure to the <b>existing insurer</b></td></tr>
+      <tr><td><b>Conservation</b></td><td>Existing insurer's attempt to "save" the policy by contacting the client &mdash; must be truthful; encouraged, done in the client's interest (not the old agent's)</td></tr>
+      <tr><td>Existing insurer's response window</td><td><b>20 days</b> to send the policyowner an outline of the current policy</td></tr>
+      <tr><td>Annuity ledger/summary request</td><td>Existing insurer must furnish within <b>5 working days</b> of the request</td></tr>
+      <tr><td>Record retention</td><td>Replacing <b>and</b> existing insurers must retain signed apps/disclosures/materials for <b>no less than 3 years</b></td></tr>
+      <tr><td>Free-look on the new (replacement) policy</td><td><b>30 days</b>, full refund, no questions asked</td></tr>
+      </table></div>
+
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc">
+      <b>Memorize these time limits separately:</b>
+      <ul>
+      <li><b>20 days</b> &mdash; existing insurer's conservation outline</li>
+      <li><b>5 working days</b> &mdash; existing insurer furnishing annuity summary/ledger</li>
+      <li><b>30 days</b> &mdash; free-look on replacement policies AND age-60+ policies</li>
+      <li><b>3 years</b> &mdash; record retention (not 2, not 5)</li>
+      </ul>
+      </div></div>
+
+      <h5>Replacement Rules Do NOT Apply To:</h5>
+      <ul>
+      <li>Credit life insurance</li>
+      <li>Group life insurance or group annuities</li>
+      <li><b>Same-insurer</b> conversions/changes (internal policy change)</li>
+      <li>Replacing insurer = existing insurer (same-company transaction)</li>
+      </ul>
+
+      <h5>No-Agent Sales (direct response/internet)</h5>
+      <ul>
+      <li>Insurer must still present the replacement disclosure <b>as soon as replacement is suspected</b>, even if that means <b>at policy delivery</b> (e.g., via mail).</li>
+      <li>Must still ask on the application about existing life insurance/replacement intent.</li>
+      <li><b>Not using agents does not excuse replacement duties.</b></li>
+      </ul>
+      <p><b>Burden of compliance</b> falls on the <b>replacing insurer</b> &mdash; must ensure its agents comply, and must return incomplete applications/disclosures to the agent.</p>
+
+      <h4>3. Agent Duty &amp; Liability Pitfalls</h4>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Never leave a client without coverage.</b> If a client cancels/lapses the old policy before the new one is approved and then gets declined or rated on the new application, the client may become <b>uninsurable</b>.</div></div>
+      <ul>
+      <li>If a client insists on canceling early against advice: get a <b>signed letter</b> stating the client is acting <b>against the agent's advice</b> (protects the agent from liability).</li>
+      </ul>
+      <p><b>Replacement considerations</b> to weigh (common distractor topics):</p>
+      <ul>
+      <li>New policy may cost more (client is older, potentially less insurable)</li>
+      <li><b>Incontestability period may restart</b> with the new insurer &mdash; check if the new company honors the already-met period</li>
+      <li>Premium guarantees may differ between policies</li>
+      <li>Surrender charges on the current cash-value policy &mdash; consider a <b>1035 exchange</b></li>
+      </ul>
+
+      <h4>4. Penalties for Replacement Violations</h4>
+      <div class="table-wrap"><table>
+      <tr><th>Violator</th><th>1st Violation</th><th>2nd+ Violation</th></tr>
+      <tr><td><b>Agent</b></td><td>Minimum <b>$1,000</b></td><td><b>$5,000&ndash;$50,000</b> per violation</td></tr>
+      <tr><td><b>Insurer</b></td><td><b>$10,000</b></td><td><b>$30,000&ndash;$300,000</b> per violation</td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">Commissioner may <b>suspend or revoke license</b> of any violator. <b>Trap:</b> insurer penalties run roughly <b>10&times;</b> the agent penalties at each tier &mdash; easy to swap the numbers.</div></div>
+
+      <h4>5. Required Cover-Page Disclosures <span class="code">(CIC 10127.10)</span></h4>
+      <p>Non-variable individual life/annuity policies need the standard 30-day/surrender-charge notice, in <b>12-pt bold</b>, with <b>1-inch margins</b>, on the cover page/jacket or a sticker.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Excludes:</b> variable contracts, modified guaranteed contracts, credit-transaction policies, contractual conversion/policy-change provisions, contributory/noncontributory <b>employer group</b> life or annuity contracts, and <b>group term life</b>.</div></div>
+      <p>Variable annuity/life/modified guaranteed contracts require an <b>expanded notice</b> covering: cancellation policy, investment restrictions, refund policy, and penalty/surrender charge.</p>
+
+      <h4>6. Investment Handling During Free-Look <span class="code">(CIC 10127.10)</span></h4>
+      <p>During the <b>30-day free-look</b> for a variable annuity, the premium defaults to <b>fixed-income/money-market investments</b> <b>unless</b> the purchaser specifically directs it into the <b>stock/bond portfolio</b> underlying the contract.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">
+      <b>Refund consequence depends on where the money was placed:</b>
+      <ul>
+      <li>Left in fixed/money-market (default) and returned within 30 days &rarr; refund of <b>premium + policy fees</b> (full).</li>
+      <li>Directed into stock/bond portfolio and returned within 30 days &rarr; refund of <b>account value on the date received by the insurer/agent</b> &mdash; <b>could be less than the premium paid</b>.</li>
+      </ul>
+      <b>Biggest trap here:</b> the variable-product refund is conditional on the investment choice, not automatically the full premium &mdash; opposite of the standard non-variable free-look, which always refunds the full premium.
+      </div></div>
+    </section>
+
+    <section class="topic" id="ch2-2">
+      <div class="topic-header"><span class="topic-index">II</span><h3 class="topic-title">Insurable Interest</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.6 min</span></div>
+        <audio controls preload="none" src="audio/ch2_part2.m4a"></audio>
+      </div>
+
+      <h4>Core Definition</h4>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc"><b>Insurable interest</b> = a legitimate financial/relational stake in the <b>continued life</b> of the insured, required so insurance can't become a wager on someone's death. Insurance <b>indemnifies</b>; it does not allow <b>speculation</b> on another's life.</div></div>
+      <ul>
+      <li><b>Anyone can insure their own life</b> &mdash; no insurable interest issue (the owner controls the policy: increase, decrease, cancel, change provisions).</li>
+      <li>To insure <b>someone else's</b> life, you need <b>insurable interest</b> <i>and</i> that person's <b>consent</b>.</li>
+      </ul>
+
+      <h4>The 4 Test Questions</h4>
+      <ol>
+      <li>Would the insured's death cause the policyowner (or dependents) <b>financial hardship</b>?</li>
+      <li>Does the insured <b>owe</b> the policyowner money or economic support (current/future)?</li>
+      <li>Do they share a close relationship with <b>common economic/familial goals</b>?</li>
+      <li>Do they have <b>common ownership interest in property</b>?</li>
+      </ol>
+
+      <h4>Statutory List &mdash; Every Person Has Insurable Interest In:</h4>
+      <div class="table-wrap"><table>
+      <tr><th>#</th><th>Interest</th></tr>
+      <tr><td>1</td><td><b>Himself/herself</b></td></tr>
+      <tr><td>2</td><td>Any person he/she <b>depends on wholly or in part</b> for education or support</td></tr>
+      <tr><td>3</td><td>Any person under <b>legal obligation for payment</b> of money/property/services that could be delayed/prevented by death or illness (e.g., <b>child support</b>)</td></tr>
+      <tr><td>4</td><td>Any person upon whose life an <b>estate or interest vested in him/her</b> depends</td></tr>
+      </table></div>
+
+      <h4>Memory Device: "Blood and Business"</h4>
+      <div class="table-wrap"><table>
+      <tr><th>Category</th><th>Includes</th></tr>
+      <tr><td><b>Blood</b></td><td>Family relations &mdash; spouse, parent/child, siblings; support one another or share common goals (e.g., home/business purchase)</td></tr>
+      <tr><td><b>Business</b></td><td>Business partners/co-owners, employer&ndash;<b>key employee</b>, creditor&ndash;debtor (lender/borrower)</td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">"Blood" also covers <b>former</b> family relations &mdash; e.g., <b>divorce decrees</b> requiring the paying spouse to maintain life insurance on themself for <b>alimony/child support</b>. Ownership structure: the <b>receiving spouse owns the policy</b> on the paying spouse's (insured's) life.</div></div>
+
+      <h4>Insurable Interest vs. Beneficiary Designation</h4>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">
+      <ul>
+      <li>Insurable interest applies <b>only to the policyowner</b>, <b>NOT</b> the beneficiary.</li>
+      <li><b>Neither</b> the policyowner <b>nor</b> the insured must show insurable interest when naming a beneficiary.</li>
+      <li>A <b>beneficiary can be anyone</b> &mdash; a stranger, business, or charity &mdash; as long as they're willing to accept the money.</li>
+      </ul>
+      </div></div>
+      <p>Applies across insurance types generally (e.g., you can't insure a car you don't own &mdash; same ownership-interest logic).</p>
+
+      <h4>&#9200; Timing Rule &mdash; Highest-Yield Exam Trap</h4>
+      <div class="table-wrap"><table>
+      <tr><th>Insurance Type</th><th>When must insurable interest exist?</th></tr>
+      <tr><td><b>Life &amp; Health</b></td><td>At the <b>time of application ONLY</b> &mdash; <b>not</b> required to exist at the time of loss (death) <span class="code">(CIC 10110)</span></td></tr>
+      <tr><td><b>Property &amp; Casualty (P&amp;C)</b></td><td>At <b>both</b> the time of application <b>AND</b> the time of loss</td></tr>
+      </table></div>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc">This is the single biggest life-vs-P&amp;C distinction tested: a life beneficiary's/owner's insurable interest can lapse (e.g., divorce) after issue and the policy remains valid, since interest existed at application. P&amp;C coverage would <b>not</b> pay out if ownership interest is gone at the time of the loss.</div></div>
+      <p><b>Application note:</b> if the relationship between insured and proposed owner isn't obvious (e.g., different last name/address), the <b>agent should note the relationship on the application</b> so the underwriter can verify insurable interest exists.</p>
+    </section>
+
+    <div class="final-traps topic" id="ch2-3">
+      <div class="topic-header"><span class="topic-index">III</span><h3 class="topic-title">Highest-Yield Trap Summary</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.3 min</span></div>
+        <audio controls preload="none" src="audio/ch2_part3.m4a"></audio>
+      </div>
+      <ul>
+      <li>Free-look clock starts on <b>delivery/signed receipt</b>, never on application-signing or underwriting.</li>
+      <li>Standard free-look = <b>10&ndash;30 days</b>; <b>replacements</b> and <b>age 60+</b> always get a flat <b>30 days</b>.</li>
+      <li>Variable product refunds = <b>account value</b> (can be less than premium); non-variable refunds = <b>full premium</b>.</li>
+      <li>Replacement disclosure duty triggers on mere <b>suspicion</b>, not just certainty.</li>
+      <li><b>Conservation</b> protects the <i>client</i>, not the original agent's commission.</li>
+      <li>Time limits to keep straight: <b>20 days</b> (conservation outline), <b>5 working days</b> (annuity ledger), <b>30 days</b> (replacement/60+ free-look &amp; insurer refund deadline), <b>3 years</b> (record retention).</li>
+      <li>Replacement penalties: agents <b>$1,000 / $5K&ndash;$50K</b>; insurers <b>$10,000 / $30K&ndash;$300K</b> &mdash; insurer tier is ~10&times; the agent tier.</li>
+      <li>Replacement rules don't apply to credit life, group life/annuities, or same-insurer conversions.</li>
+      <li><b>Insurable interest</b> is required only for the <b>policyowner</b>, never the beneficiary &mdash; anyone can be named beneficiary.</li>
+      <li><b>Timing trap:</b> Life/health needs insurable interest <b>only at application</b>; P&amp;C needs it <b>at application AND at loss</b>.</li>
+      <li>"Blood and business" covers family <i>and</i> former-family (divorce/alimony) relations, plus business partners, key employees, and creditor/debtor pairs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CHAPTER 3 -->
+  <!-- ============================================================ -->
+  <section class="chapter" id="chapter-3" data-accent="3">
+    <div class="chapter-divider"><div class="line"></div></div>
+    <div class="chapter-label">Chapter 3</div>
+    <h2 class="chapter-title">Accident, Health &amp; Senior Products</h2>
+    <p class="chapter-desc">Workers comp &amp; 24-hour coverage, medical expense insurance regulation, long-term care insurance, and Medicare supplement plans.</p>
+
+    <section class="topic" id="ch3-1">
+      <div class="topic-header"><span class="topic-index">I</span><h3 class="topic-title">Workers Compensation &amp; Medical Expense Regulation</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.7 min</span></div>
+        <audio controls preload="none" src="audio/ch3_part1.m4a"></audio>
+      </div>
+
+      <h4>1. Education Requirements <span class="code">(CIC 1749c)</span></h4>
+      <p>Accident &amp; health agents who want to sell <b>24-hour care coverage</b> must complete an approved CE course on workers compensation and general principles of employer liability.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Trap:</b> required hours must be <b>equal to, but NO GREATER THAN</b>, the prelicensing hours required for a P&amp;C broker-agent on the same subjects &mdash; a cap, not a floor. For resident licensees, this CE <b>can count toward</b> their regular CE requirement.</div></div>
+
+      <h4>2. 24-Hour Coverage <span class="code">(CIC 1749.02)</span></h4>
+      <p><b>24-hour coverage</b> = an employee is covered by <b>two separate policies</b> together: a <b>workers compensation</b> policy (on-the-job injuries) plus a <b>medical/disability policy</b> (off-the-job injuries/illness) &mdash; combined, the employee is covered 24 hours a day, and the time/place of injury doesn't matter.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">24-hour coverage is <b>never one single policy</b>, and it <b>may NOT be distributed using a life insurance policy</b>.</div></div>
+      <p><b>Disadvantages:</b> government regulation; difficulty coordinating WC benefits with the group/individual health plan; possible overlap between the two plans; confusion over deductibles, coinsurance, and copayments.</p>
+
+      <h4>3. Medical Expense Insurance &mdash; Regulation of Providers <span class="code">(CIC 740)</span></h4>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc">The <b>Department of Insurance (CDI)</b> is the <b>default/primary</b> regulator of any person/entity providing coverage for medical, surgical, chiropractic, physical therapy, speech pathology, audiology, mental health, dental, hospital, or optometry services &mdash; <b>unless</b> that provider can show another agency (federal, another state, or another CA agency) already has primary responsibility.</div></div>
+      <p><b>Health care services plans</b> that stay under CDI include those run by nonprofit agencies, schools/colleges/universities, public agencies (for employees/students/faculty), and self-funded employer plans.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Two-part exception:</b> a nonprofit loses this CDI coverage only if it is <b>both</b> the insurance provider <b>and</b> the owner-operator of the care facility.</div></div>
+
+      <div class="table-wrap"><table>
+      <tr><th>Regulator</th><th>Primary jurisdiction over</th></tr>
+      <tr><td><b>CDI</b> (Dept. of Insurance)</td><td>Most <b>PPO</b> and <b>EPO</b> plans; other <b>disability insurance</b> companies</td></tr>
+      <tr><td><b>DMHC</b> (Dept. of Managed Health Care)</td><td><b>HMOs</b>; <b>Point of Service (POS)</b> plans; <b>some</b> PPO/EPO plans</td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">Not all PPO/EPO = CDI &mdash; DMHC regulates <i>some</i> of them too. Because DMHC has primary enforcement authority over managed care, <b>CDI's oversight there is only limited</b>.</div></div>
+    </section>
+
+    <section class="topic" id="ch3-2">
+      <div class="topic-header"><span class="topic-index">II</span><h3 class="topic-title">Long-Term Care Insurance &mdash; Core Rules</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~2 min</span></div>
+        <audio controls preload="none" src="audio/ch3_part2.m4a"></audio>
+      </div>
+
+      <h4>Pre-Existing Conditions</h4>
+      <p><b>Pre-existing condition</b> = a condition for which medical advice/treatment was recommended or received within <b>6 months</b> preceding the policy's effective date.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">After the <b>6-month</b> waiting period, the insurer <b>must cover all disclosed pre-existing conditions</b>, regardless of when the insured becomes disabled &mdash; unless permanently excluded or covered by a <b>Commissioner-approved rider/waiver</b>.</div></div>
+
+      <h4>Free-Look / Return of Policy <span class="code">(CIC 10232.7)</span></h4>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc"><b>30 days</b> to return the policy <b>by first-class mail</b> for a full refund. The policy is <b>void from the beginning</b> &mdash; no claims payable.</div></div>
+
+      <h4>Home Care Required Benefits <span class="code">(CIC 10232.8)</span></h4>
+      <p>For tax-qualified policies, benefits trigger when the insured is <b>chronically ill</b>: impaired in <b>at least 2 of 6 activities of daily living (ADLs)</b>, or has a <b>severe cognitive impairment</b>. Assessment must be by a health care practitioner who is <b>NOT an employee of the insurer</b>.</p>
+      <div class="table-wrap"><table>
+      <tr><th>#</th><th>ADL</th><th>Description</th></tr>
+      <tr><td>1</td><td><b>Eating</b></td><td>Taking in food / feeding oneself</td></tr>
+      <tr><td>2</td><td><b>Bathing</b></td><td>Bathing without assistance</td></tr>
+      <tr><td>3</td><td><b>Continence</b></td><td>Bowel and bladder control</td></tr>
+      <tr><td>4</td><td><b>Dressing</b></td><td>Clothing oneself</td></tr>
+      <tr><td>5</td><td><b>Toileting</b></td><td>Personal cleansing and grooming</td></tr>
+      <tr><td>6</td><td><b>Transferring</b></td><td>Mobility &mdash; moving place to place in the home</td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">"Impaired" = needs <b>either</b> substantial supervision (stand-by assistance) <b>or</b> hands-on assistance &mdash; either one counts.</div></div>
+
+      <h4>Prohibited Provisions <span class="code">(CIC 10233.2)</span></h4>
+      <ul>
+      <li>Must be <b>guaranteed renewable for life</b>; can only be cancelled/nonrenewed for <b>nonpayment of premium</b>.</li>
+      <li><b>No new waiting period</b> on a same-insurer replacement/conversion &mdash; except a benefit <b>increase</b> may get a temporary exclusion of up to <b>6 months</b>.</li>
+      <li>Cannot limit benefits to skilled nursing only, use vague "usual and customary" language, or raise/cancel a spouse's coverage after divorce.</li>
+      <li>Additional specific benefit must be <b>&ge;5&times;</b> the daily facility benefit.</li>
+      <li>Home/community care daily benefit must be <b>&ge; the greater of $50/day or 50%</b> of the facility-care benefit.</li>
+      </ul>
+
+      <h4>Replacement Policies <span class="code">(CIC 10233.3, 10234.95, 10234.16)</span></h4>
+      <p>New contract cannot deny pre-existing conditions or restart an already-satisfied elimination period; insurer cannot reduce payment for expenses already paid out-of-pocket.</p>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc"><b>3 or more</b> LTC transactions with the same insured within <b>12 months</b> is <b>not allowed</b>.</div></div>
+      <p>Replacement notice to the applicant must cover: whether the decision could be a good one; that pre-existing conditions might not be covered immediately by the new policy; to check with the existing insurer; and that nondisclosure of medical history can void the contract (with full premium refund).</p>
+
+      <h4>Outline of Coverage <span class="code">(CIC 10233.5)</span></h4>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">Must state that <b>LTC is NOT Medicare supplement insurance</b>, and that the <b>cost of care rises over time but benefits do NOT</b> unless an inflation-protection option is chosen.</div></div>
+
+      <h4>Marketing Standards &amp; HICAP <span class="code">(CIC 10234.93)</span></h4>
+      <p><b>HICAP</b> = Health Insurance Counseling and Advocacy Program &mdash; free help for consumers evaluating LTC policies. Insurers must disclose HICAP's existence, provide a current Area Agencies on Aging list, and give the Dept. of Aging's shopper's guide. Prohibited: <b>twisting</b>, high-pressure tactics, and undisclosed <b>cold lead</b> advertising.</p>
+    </section>
+
+    <section class="topic" id="ch3-3">
+      <div class="topic-header"><span class="topic-index">III</span><h3 class="topic-title">Medicare Supplement &amp; Long-Term Care Basics</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~2 min</span></div>
+        <audio controls preload="none" src="audio/ch3_part3.m4a"></audio>
+      </div>
+
+      <h4>1. Medicare Supplement (Medigap) Plans <span class="code">(CIC 10194.2&ndash;10194.3)</span></h4>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc"><b>Plan A = core/basic benefits only</b>, and must be offered by every insurer selling Medigap. All other lettered plans are optional. Insurers <b>cannot alter benefits</b> within a plan or <b>change its letter</b>.</div></div>
+      <p><b>Core benefits</b> (in every plan, incl. A): hospital co-pays days 61&ndash;90; lifetime reserve days 91&ndash;150; 365 extra days after Medicare is exhausted; first 3 pints of blood; Part B coinsurance (20%).</p>
+
+      <div class="table-wrap"><table>
+      <tr><th>Plan</th><th>Adds to core</th></tr>
+      <tr><td><b>B</b></td><td>+ Part A deductible</td></tr>
+      <tr><td><b>D</b></td><td>+ Part A deductible, skilled nursing coinsurance, foreign travel benefit</td></tr>
+      <tr><td><b>G</b></td><td>+ Part A deductible, skilled nursing coinsurance, <b>100%</b> Part B excess charges, foreign travel; must cover ADL services Medicare excludes</td></tr>
+      <tr><td><b>K</b></td><td>Modified core &mdash; <b>50%</b> of Part A deductible, blood, Part B coinsurance, skilled nursing coinsurance, hospice/respite cost-sharing</td></tr>
+      <tr><td><b>L</b></td><td>Modified core &mdash; <b>75%</b> of the same list</td></tr>
+      <tr><td><b>M, N</b></td><td>Similar to Plan D; co-pays/deductibles vary</td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Plans C, E, F, H, I, J are closed to new sales</b> &mdash; but existing holders keep them (grandfathered). Days 61&ndash;90, 91&ndash;150, and the extra 365 days stay at <b>100%</b> even under Plans K/L.</div></div>
+
+      <h4>2. Guaranteed Issue &amp; Anti-Discrimination</h4>
+      <p>During open enrollment, the insurer <b>must</b>: sell the policy (guaranteed issue); cover pre-existing conditions after <b>6 months</b>; not charge more for past/present health problems. <span class="code">(CIC 10194.8)</span> bans unfair treatment of any person/class of risk in sale or pricing.</p>
+
+      <h4>3. Medigap Replacement <span class="code">(CIC 10197)</span></h4>
+      <ul>
+      <li>No one may cause an <b>unnecessary replacement</b> (decreased benefits + increased premium).</li>
+      <li>Agent must list <b>all</b> other disability policies sold to the applicant &mdash; in force <b>and</b> those sold in the past <b>5 years</b> even if lapsed.</li>
+      <li>Replacement notice (signed by applicant &amp; agent) must be given <b>before</b> the new policy is issued; direct response insurers give a similar notice <b>upon issuance</b> instead.</li>
+      </ul>
+
+      <h4>4. Long-Term Care Insurance &mdash; Definition &amp; Settings</h4>
+      <p>Medicare pays for a max of <b>100 days</b> in a skilled nursing facility (not 100% of cost). Medi-Cal LTC requires "spend down" and "asset recovery" after death.</p>
+      <p><b>LTC insurance</b> covers diagnostic, preventive, therapeutic, rehabilitative, maintenance, or personal care services <b>outside an acute care hospital unit</b> (nursing homes, home health care, adult day care, hospice, etc.).</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Excludes</b>: disability-based LTC policies, and anything designed primarily as <b>Medicare supplement</b> or <b>major medical</b> coverage.</div></div>
+
+      <div class="table-wrap"><table>
+      <tr><th>Policy design <span class="code">(CIC 10232.1)</span></th><th>Coverage setting</th></tr>
+      <tr><td><b>Facility-only</b></td><td>Nursing home, etc.</td></tr>
+      <tr><td><b>Home care</b></td><td>Insured's home (or another's)</td></tr>
+      <tr><td><b>Community-based</b></td><td>Adult day care, hospice</td></tr>
+      <tr><td><b>Comprehensive</b></td><td>Facility + home/community-based</td></tr>
+      </table></div>
+      <p>LTC can be added as a <b>rider</b> to a Medicare supplement or health policy, but it <b>never</b> pays actual Medicare or major medical expenses.</p>
+    </section>
+
+    <section class="topic" id="ch3-4">
+      <div class="topic-header"><span class="topic-index">IV</span><h3 class="topic-title">LTC Consumer Protection &amp; Ethics</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.5 min</span></div>
+        <audio controls preload="none" src="audio/ch3_part4.m4a"></audio>
+      </div>
+
+      <h4>Duties of Honor, Good Faith &amp; Fair Dealing <span class="code">(CIC 10234.8)</span></h4>
+      <p>All insurers/brokers/agents owe LTC clients a duty of honesty, good faith, and fair dealing. Pre-purchase conduct during the offer/sale can be used as evidence in a legal action alleging a breach.</p>
+
+      <h4>Unnecessary Replacement <span class="code">(CIC 10234.85)</span></h4>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc">Any <b>3rd or greater</b> LTC policy sold to a policyholder within <b>12 months</b> is <b>automatically considered unnecessary</b> &mdash; unless the sole purpose is consolidating policies with a single insurer.</div></div>
+
+      <h4>Advertisement &amp; Cold Lead Disclosure <span class="code">(CIC 10234.9)</span></h4>
+      <div class="table-wrap"><table>
+      <tr><th>Requirement</th><th>Detail</th></tr>
+      <tr><td>Ad review by Commissioner</td><td>At least <b>30 days</b> before use</td></tr>
+      <tr><td>Ad retention</td><td>At least <b>3 years</b></td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">Lead-generating ads must <b>prominently disclose</b> that an agent will make contact. Anyone contacting a consumer from a <b>cold-lead device</b> must <b>immediately disclose</b> that fact.</div></div>
+
+      <h4>Replacement Commission Rules <span class="code">(CIC 10234.97a&ndash;b)</span></h4>
+      <p>Commission on a replaced LTC policy = calculated on the <b>difference</b> between the new and old annual premiums. If the new premium is <b>&le;</b> the old one, commission is capped at the <b>renewal rate</b> (not first-year rate). Replacement requires the insurer to declare the new policy <b>materially improves</b> the insured's position. <b>Does not apply</b> to group insurance replacement. "Commission" includes <b>any</b> compensation &mdash; bonuses, gifts, prizes, awards, finder's fees.</p>
+    </section>
+
+    <div class="final-traps topic" id="ch3-5">
+      <div class="topic-header"><span class="topic-index">V</span><h3 class="topic-title">Highest-Yield Trap Summary</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.3 min</span></div>
+        <audio controls preload="none" src="audio/ch3_part5.m4a"></audio>
+      </div>
+      <ul>
+      <li><b>24-hour coverage</b> = WC policy + separate health/disability policy, together &mdash; never one policy, never through life insurance.</li>
+      <li><b>CDI</b> defaults as regulator for medical expense providers; steps back only when another agency's primary jurisdiction is proven.</li>
+      <li><b>CDI</b> = most PPO/EPO + disability insurers; <b>DMHC</b> = HMOs, POS plans, and some PPO/EPO.</li>
+      <li>LTC pre-existing condition look-back = <b>6 months</b>; LTC free-look = <b>30 days</b> by first-class mail.</li>
+      <li>The <b>6 ADLs</b>: eating, bathing, continence, dressing, toileting, transferring &mdash; impairment in <b>2 of 6</b> (or severe cognitive impairment) triggers benefits.</li>
+      <li><b>3+ LTC transactions</b> with the same insured within <b>12 months</b> = automatically unnecessary replacement.</li>
+      <li>Medigap <b>Plan A is mandatory</b> for insurers to offer; Plans <b>C, E, F, H, I, J are closed</b> to new sales (still valid if already owned).</li>
+      <li>Medigap <b>Plans K/L</b> cover core benefits at <b>50%</b> and <b>75%</b> respectively &mdash; but days 61&ndash;90/91&ndash;150/+365 stay at 100%.</li>
+      <li><b>LTC excludes</b> Medicare supplement and major medical coverage &mdash; even as a rider, it never pays those expenses.</li>
+      <li>LTC ad review: <b>30 days</b> advance to Commissioner; <b>3-year</b> retention &mdash; don't confuse with the 12-month/3-policy replacement rule.</li>
+      <li>Replacement commission: capped at <b>renewal rate</b> unless the new premium is actually <b>higher</b> than the old one.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="end">
+    More chapters will be added to this same file as you cover them &mdash; the sidebar will grow to match.
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  // ---- theme toggle (system / light / dark) ----
+  var root = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  var states = ['system','light','dark'];
+  var labels = {system:'&#127765; Theme: System', light:'&#9728;&#65039; Theme: Light', dark:'&#127769; Theme: Dark'};
+  var current = 'system';
+  try { current = localStorage.getItem('sg-theme') || 'system'; } catch(e){}
+  function apply(state){
+    if(state==='system'){ root.removeAttribute('data-theme'); }
+    else { root.setAttribute('data-theme', state); }
+    btn.innerHTML = labels[state];
+  }
+  apply(current);
+  btn.addEventListener('click', function(){
+    var idx = (states.indexOf(current)+1) % states.length;
+    current = states[idx];
+    try { localStorage.setItem('sg-theme', current); } catch(e){}
+    apply(current);
+  });
+
+  // ---- mobile sidebar ----
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  var menuBtn = document.getElementById('menuBtn');
+  function closeSidebar(){ sidebar.classList.remove('open'); overlay.style.display='none'; }
+  function openSidebar(){ sidebar.classList.add('open'); overlay.style.display='block'; }
+  menuBtn.addEventListener('click', function(){
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+  overlay.addEventListener('click', closeSidebar);
+  document.querySelectorAll('.nav-link').forEach(function(a){
+    a.addEventListener('click', function(){ if(window.innerWidth<=900) closeSidebar(); });
+  });
+
+  // ---- nav filter ----
+  var filterInput = document.getElementById('navFilter');
+  filterInput.addEventListener('input', function(){
+    var q = filterInput.value.trim().toLowerCase();
+    document.querySelectorAll('.nav-link').forEach(function(a){
+      var match = a.textContent.toLowerCase().indexOf(q) !== -1;
+      a.classList.toggle('hidden', q.length>0 && !match);
+    });
+  });
+
+  // ---- scrollspy ----
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = '#' + entry.target.id;
+      var link = links.find(function(a){ return a.getAttribute('href') === id; });
+      if(!link) return;
+      if(entry.isIntersecting){
+        links.forEach(function(a){ a.classList.remove('active'); });
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+  sections.forEach(function(s){ io.observe(s); });
+
+  // ---- scroll progress ----
+  var fill = document.getElementById('progressFill');
+  function updateProgress(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = h>0 ? (window.scrollY/h)*100 : 0;
+    fill.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive:true });
+  updateProgress();
+})();
+</script>
+
+</body>
+</html>
