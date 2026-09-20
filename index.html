@@ -106,6 +106,7 @@
   .nav-group[data-accent="1"]{ --accent-local:#0071e3; }
   .nav-group[data-accent="2"]{ --accent-local:#af52de; }
   .nav-group[data-accent="3"]{ --accent-local:#ff9500; }
+  .nav-group[data-accent="4"]{ --accent-local:#30b0c7; }
   .nav-link{
     display:block; padding:8px 10px; margin:1px 0; border-radius:9px;
     color:var(--text); text-decoration:none; font-size:13.5px;
@@ -164,6 +165,7 @@
   .chapter[data-accent="1"]{ --accent-local:#0071e3; }
   .chapter[data-accent="2"]{ --accent-local:#af52de; }
   .chapter[data-accent="3"]{ --accent-local:#ff9500; }
+  .chapter[data-accent="4"]{ --accent-local:#30b0c7; }
   .chapter-divider{
     display:flex; align-items:center; gap:14px; margin:50px 0 30px;
   }
@@ -305,6 +307,16 @@
       <a class="nav-link" href="#ch3-4">IV. LTC Consumer Protection &amp; Ethics</a>
       <a class="nav-link" href="#ch3-5">V. Trap Summary</a>
     </div>
+    <div class="nav-group" data-accent="4">
+      <div class="nav-chapter-title">Chapter 4</div>
+      <a class="nav-link" href="#ch4-1">I. Insurable Interest &mdash; Property &amp; Contingent</a>
+      <a class="nav-link" href="#ch4-2">II. CA Standard Fire Insurance Policy</a>
+      <a class="nav-link" href="#ch4-3">III. Risk Retention &amp; Purchasing Groups</a>
+      <a class="nav-link" href="#ch4-4">IV. Valued vs. Open Policies</a>
+      <a class="nav-link" href="#ch4-5">V. Cancellation &amp; Nonrenewal Rules</a>
+      <a class="nav-link" href="#ch4-6">VI. Auto Repair Referral Rules</a>
+      <a class="nav-link" href="#ch4-7">VII. Trap Summary</a>
+    </div>
   </nav>
   <button class="theme-toggle" id="themeToggle">&#127765; Theme: System</button>
 </aside>
@@ -317,9 +329,9 @@
     <h1>Study Guide</h1>
     <p class="hero-sub">Property &amp; Casualty &middot; Personal Lines &middot; Life Insurance &amp; Annuities</p>
     <div class="hero-stats">
-      <div class="stat"><b>3</b><span>Chapters</span></div>
-      <div class="stat"><b>15</b><span>Sections</span></div>
-      <div class="stat"><b>~21 min</b><span>Audio</span></div>
+      <div class="stat"><b>4</b><span>Chapters</span></div>
+      <div class="stat"><b>22</b><span>Sections</span></div>
+      <div class="stat"><b>~32 min</b><span>Audio</span></div>
     </div>
   </header>
 
@@ -1107,6 +1119,263 @@
       <li><b>LTC excludes</b> Medicare supplement and major medical coverage &mdash; even as a rider, it never pays those expenses.</li>
       <li>LTC ad review: <b>30 days</b> advance to Commissioner; <b>3-year</b> retention &mdash; don't confuse with the 12-month/3-policy replacement rule.</li>
       <li>Replacement commission: capped at <b>renewal rate</b> unless the new premium is actually <b>higher</b> than the old one.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CHAPTER 4 -->
+  <!-- ============================================================ -->
+  <section class="chapter" id="chapter-4" data-accent="4">
+    <div class="chapter-divider"><div class="line"></div></div>
+    <div class="chapter-label">Chapter 4</div>
+    <h2 class="chapter-title">Property Insurance Provisions &amp; CA Code Supplement</h2>
+    <p class="chapter-desc">Insurable interest in property, the California Standard Fire Insurance Policy, risk retention/purchasing groups, valued policies, and cancellation/nonrenewal rules.</p>
+
+    <section class="topic" id="ch4-1">
+      <div class="topic-header"><span class="topic-index">I</span><h3 class="topic-title">Insurable Interest &mdash; Property &amp; Contingent Interests</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.3 min</span></div>
+        <audio controls preload="none" src="audio/ch4_part1.m4a"></audio>
+      </div>
+
+      <h4>1. No Insurable Interest &mdash; Void Contract <span class="code">(CIC 280)</span></h4>
+      <p>If the insured has <b>NO insurable interest</b>, the contract is <b>void</b> &mdash; full stop.</p>
+
+      <h4>2. Property Insurance Timing Rule <span class="code">(CIC 286)</span></h4>
+      <p>An interest in insured property must exist <b>when the insurance takes effect</b> and <b>when the loss occurs</b> &mdash; but it does <b>NOT</b> need to exist in the meantime.</p>
+      <div class="table-wrap"><table>
+      <tr><th>Insurance Type</th><th>At inception?</th><th>At loss?</th><th>In between?</th></tr>
+      <tr><td><b>Property (CIC 286)</b></td><td>Required</td><td>Required</td><td>Not required</td></tr>
+      <tr><td><b>Life &amp; Health (CIC 10110)</b></td><td>Required</td><td>Not required</td><td>Not required</td></tr>
+      </table></div>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc">This is the property-side half of the <b>Ch. 2 &sect;II timing trap</b>: life/health only needs insurable interest at application; property needs it at <b>both</b> application and loss &mdash; but even property doesn't need <b>continuous</b> interest throughout the policy term.</div></div>
+
+      <h4>3. Contingent or Expectant Interests <span class="code">(CIC 283)</span></h4>
+      <p>A simple conditional or expectant interest in anything, <b>not based on any actual right or claim</b> to that thing, nor upon any <b>valid contract for its ownership or possession</b>, is <b>NOT</b> considered an insurable interest.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Trap:</b> merely <i>hoping</i> or <i>expecting</i> to inherit or acquire property someday is not enough &mdash; there must be an enforceable right or contract behind the interest, not just an expectation.</div></div>
+    </section>
+
+    <section class="topic" id="ch4-2">
+      <div class="topic-header"><span class="topic-index">II</span><h3 class="topic-title">California Standard Fire Insurance Policy</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~2.3 min</span></div>
+        <audio controls preload="none" src="audio/ch4_part2.m4a"></audio>
+      </div>
+      <p>The mandated core policy form underlying CA fire coverage. Exam questions pull from its exact clauses.</p>
+
+      <h4>1. Concealment &amp; Fraud Clause</h4>
+      <p>The <b>entire policy is void</b> if the insured <b>willfully</b> concealed or misrepresented any material fact/circumstance concerning the insurance, the subject of it, or the insured's interest &mdash; or committed fraud or false swearing &mdash; <b>whether before or after a loss</b>.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Nuance vs. Ch. 1 &sect;II:</b> general CIC concealment doctrine voids a policy <b>regardless of intent</b>. This standard-fire-policy clause specifically says <b>"willfully"</b> &mdash; i.e., this particular clause targets intentional concealment, and it uniquely applies both before <b>and after</b> a loss.</div></div>
+
+      <h4>2. Uninsured &amp; Excepted Property</h4>
+      <p>The policy does <b>not</b> cover accounts, bills, currency, deeds, evidences of debt, money, or securities; nor bullion or manuscripts <b>unless specifically named in writing</b>.</p>
+
+      <h4>3. Perils Not Included</h4>
+      <ul>
+      <li>Enemy attack, invasion, insurrection, rebellion, revolution, civil war, or usurped power</li>
+      <li>Order of any civil authority &mdash; <b>except</b> destructive acts taken to prevent the spread of fire</li>
+      <li>Neglect of the insured to use all reasonable means to save/preserve the property</li>
+      <li>Theft</li>
+      </ul>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">"Order of civil authority" is excluded <b>except</b> when the destruction was to stop a fire from spreading &mdash; that specific case IS covered.</div></div>
+
+      <h4>4. Other Insurance, Suspension &amp; Endorsements</h4>
+      <ul>
+      <li>Other insurance may be prohibited or limited by endorsement.</li>
+      <li>Coverage is <b>suspended</b> while: the hazard is increased within the insured's control/knowledge; the building is vacant/unoccupied for <b>60+ consecutive days</b>; or loss results from explosion/riot &mdash; <b>unless fire ensues</b>, in which case only the fire loss is covered.</li>
+      <li>Any additional peril must be added by written endorsement.</li>
+      <li>No waiver of any provision is valid unless it's in writing.</li>
+      </ul>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc"><b>60 consecutive days</b> vacant/unoccupied = coverage suspension trigger.</div></div>
+
+      <h4>5. Insured's Duties After a Loss</h4>
+      <ul>
+      <li>Give written notice without unnecessary delay; protect property from further damage; separate damaged from undamaged property; furnish a complete inventory.</li>
+      <li>Render a signed, sworn <b>proof of loss within 60 days</b> after the loss, unless the insurer extends it in writing.</li>
+      <li>May be required to exhibit remaining property and submit to examination under oath.</li>
+      <li>Insurer must inform the insured that tax returns are privileged; must furnish copies of claim-related documents within <b>15 calendar days</b> of a request (excluding privileged/attorney work-product material).</li>
+      </ul>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc"><b>60 days</b> &mdash; proof of loss deadline. <b>15 calendar days</b> &mdash; insurer's deadline to produce claim-related documents once requested.</div></div>
+
+      <h4>6. Appraisal Process</h4>
+      <div class="table-wrap"><table>
+      <tr><th>Step</th><th>Detail</th></tr>
+      <tr><td>Request</td><td>Either party may demand appraisal in writing if they can't agree on actual cash value or amount of loss</td></tr>
+      <tr><td>Appraiser selection</td><td>Each side selects a competent, disinterested appraiser within <b>20 days</b> of the request</td></tr>
+      <tr><td>Umpire selection</td><td>The two appraisers pick an umpire; if they fail within <b>15 days</b>, either party may ask a judge to appoint one</td></tr>
+      <tr><td>Proceedings</td><td><b>Informal</b> &mdash; no depositions, interrogatories, formal discovery, or court reporter unless both sides agree</td></tr>
+      <tr><td>Award</td><td>Appraisers state value/loss separately; if they disagree, only their differences go to the umpire; agreement of <b>any two</b> is binding and must be in writing/itemized</td></tr>
+      <tr><td>Cost split</td><td>Each party pays its own appraiser; appraisal/umpire expenses are shared <b>equally</b></td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">Appraisal is deliberately <b>informal</b> &mdash; it is not a mini-trial. No formal rules of evidence or discovery apply.</div></div>
+
+      <h4>7. Adjusters, Company Options &amp; Settlement</h4>
+      <ul>
+      <li>If the insurer assigns a <b>3rd or subsequent adjuster</b> within a 6-month period, it must give the insured a timely written status report.</li>
+      <li>The company may elect to <b>take all/part of the property</b> at the agreed/appraised value, or to <b>repair/rebuild/replace</b> with like kind and quality &mdash; it must notify its intent within <b>30 days</b> after receiving the proof of loss.</li>
+      <li><b>No abandonment</b> of property to the company is allowed.</li>
+      <li>Loss is payable <b>60 days</b> after proof of loss is received <b>and</b> the amount of loss is determined (by agreement or appraisal award).</li>
+      <li>Suit for recovery must be commenced within <b>12 months</b> after the loss, or it's barred.</li>
+      <li><b>Subrogation:</b> the insurer may take an assignment of the insured's right of recovery against a responsible third party, to the extent of the payment made.</li>
+      </ul>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc"><b>Time limits to keep straight:</b> 30 days (company's repair/replace election) &middot; 60 days (loss payable) &middot; 12 months (suit deadline).</div></div>
+    </section>
+
+    <section class="topic" id="ch4-3">
+      <div class="topic-header"><span class="topic-index">III</span><h3 class="topic-title">Risk Retention Groups &amp; Purchasing Groups</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~2.1 min</span></div>
+        <audio controls preload="none" src="audio/ch4_part3.m4a"></audio>
+      </div>
+      <p><span class="code">(CIC 125&ndash;140; Federal Liability Risk Retention Act, USC Title 15)</span></p>
+
+      <h4>1. Core Definitions</h4>
+      <div class="table-wrap"><table>
+      <tr><th>Term</th><th>Definition</th></tr>
+      <tr><td><b>Risk Retention Group (RRG)</b></td><td>A corporation/LLC whose primary activity is assuming &amp; spreading <b>all or part</b> of its group members' liability exposure; doesn't offer insurance other than liability insurance; members share related business/activities; name must include <b>"risk retention group."</b></td></tr>
+      <tr><td><b>Purchasing Group (PG)</b></td><td>A group formed to purchase <b>liability insurance on a group basis</b> for members' similar/related exposures only; can be domiciled in any state.</td></tr>
+      </table></div>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">RRGs and PGs both deal <b>only in liability insurance</b> &mdash; an RRG assumes/spreads the risk itself; a PG simply pools members to buy liability coverage from an outside insurer.</div></div>
+
+      <h4>2. Purpose of the Federal Liability Risk Retention Act</h4>
+      <ul>
+      <li>Regulate the formation and operation of RRGs and PGs in California.</li>
+      <li>Help Californians who are having difficulty obtaining liability coverage form and operate RRGs/PGs.</li>
+      <li>Authorize RRG formation for <b>directors and officers</b> of corporations (for-profit or nonprofit) in the same line of business.</li>
+      </ul>
+
+      <h4>3. Regulatory &amp; Tax Treatment</h4>
+      <ul>
+      <li>An RRG is liable for premium taxes on CA business (gross premiums written, less returned premiums) and is taxed/fined like a <b>foreign admitted insurer</b>.</li>
+      <li>Surplus line brokers must report to the Commissioner premiums placed with an RRG not chartered in California.</li>
+      <li>RRGs must comply with CA's deceptive/fraudulent practice laws, but the Commissioner needs a <b>court injunction</b> to act on that conduct.</li>
+      <li>An RRG must submit to a Commissioner-requested exam if its domicile regulator hasn't examined it within <b>60 days</b> of California's request.</li>
+      </ul>
+
+      <h4>4. Mandatory Disclosure &amp; Restrictions</h4>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc">Every RRG application and policy must carry this notice: <i>"NOTICE: This policy is issued by your risk retention group. Your risk retention group may not be subject to all of the insurance laws and regulations of your state. State insurance insolvency guarantee funds are not available for your risk retention group."</i></div></div>
+      <ul>
+      <li>RRGs can't solicit/sell to anyone ineligible for membership, or while in a hazardous financial condition.</li>
+      <li>RRGs can't join or contribute to any CA insurance insolvency guarantee fund &mdash; and their insureds aren't eligible for guarantee-fund benefits.</li>
+      <li>RRGs are excluded from CA's joint underwriting associations, the CA Automobile Assigned Risk Plan, the FAIR Plan, and market assistance plans.</li>
+      <li>A PG buying from a nonadmitted insurer or an RRG must tell its members the risk isn't protected by a guarantee fund and may not follow all CA insurance laws.</li>
+      </ul>
+
+      <h4>5. Who Can Place This Business</h4>
+      <ul>
+      <li>Only a licensed <b>fire &amp; casualty broker-agent</b> may procure RRG liability insurance in CA &mdash; except salaried RRG employees/officers not paid on a commission basis.</li>
+      <li>Only a licensed <b>surplus line broker</b> may procure PG liability insurance from a nonadmitted insurer on behalf of a CA purchasing group (a nonresident may hold this license for that purpose).</li>
+      <li>No civil liability attaches to an agent/broker who placed liability coverage for a properly licensed/incorporated CA RRG that later becomes insolvent.</li>
+      </ul>
+    </section>
+
+    <section class="topic" id="ch4-4">
+      <div class="topic-header"><span class="topic-index">IV</span><h3 class="topic-title">Valued vs. Open Policies</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.0 min</span></div>
+        <audio controls preload="none" src="audio/ch4_part4.m4a"></audio>
+      </div>
+
+      <h4>1. Open vs. Valued <span class="code">(CIC 411, 412, 2053, 2054)</span></h4>
+      <div class="table-wrap"><table>
+      <tr><th>Type</th><th>When is value set?</th><th>Typical use</th></tr>
+      <tr><td><b>Open policy</b></td><td>Value determined <b>at the time of loss</b></td><td>Most standard property policies</td></tr>
+      <tr><td><b>Valued policy</b></td><td>Value determined <b>when the policy is issued</b></td><td>Ocean marine &mdash; hard to establish cargo value after a ship sinks</td></tr>
+      </table></div>
+      <p>Valued policies are used when it's difficult to establish a loss value after the fact, or when the parties prefer to fix a value in advance. On a <b>total loss</b>, a valued policy pays the <b>full policy amount</b> &mdash; without regard to actual cash value or depreciation.</p>
+
+      <h4>2. Warranties</h4>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc">See <b>Ch. 1 &sect;II</b> for the full warranty framework <span class="code">(CIC 440&ndash;449)</span> &mdash; express vs. implied, no special wording required, breach of a material warranty voiding coverage. Same doctrine applies here to property policies.</div></div>
+    </section>
+
+    <section class="topic" id="ch4-5">
+      <div class="topic-header"><span class="topic-index">V</span><h3 class="topic-title">Policy Cancellation &amp; Nonrenewal Rules</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.8 min</span></div>
+        <audio controls preload="none" src="audio/ch4_part5.m4a"></audio>
+      </div>
+      <p><span class="code">(CIC 481.5, 660&ndash;669.5, 670, 673, 675&ndash;679.6)</span></p>
+
+      <h4>1. Address Excluded From Property Policies <span class="code">(CIC 2071)</span></h4>
+      <p>A property insurance policy must state the issuing company's name and a description of coverage (including term and premium) &mdash; but the <b>insured's address is NOT required</b> to appear in the policy.</p>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">Pairs with the Ch. 1 &sect;II trap ("financial rating not required" under CIC 381 for general policies). Keep the two straight: CIC 381 governs the <b>six general specs</b> every policy needs; CIC 2071 is specific to <b>property</b> policies and excludes the address.</div></div>
+
+      <h4>2. Auto Insurance</h4>
+      <div class="table-wrap"><table>
+      <tr><th>Situation</th><th>Notice required</th></tr>
+      <tr><td>Standard cancellation</td><td>At least <b>20 days</b> before the effective date, mailed/delivered by the insurer</td></tr>
+      <tr><td>Cancellation for nonpayment</td><td><b>10 days'</b> notice, accompanied by the reason</td></tr>
+      </table></div>
+      <ul>
+      <li>If cancelled for a reason <b>other than nonpayment</b>, the insurer must notify the insured of possible eligibility through the <b>California Automobile Assigned Risk Plan</b>.</li>
+      <li>An admitted insurer covering drivers hired by a commercial business <b>cannot</b> cancel/nonrenew solely because those drivers were convicted of Vehicle Code violations while driving a <b>private passenger vehicle not owned/leased by their employer</b>.</li>
+      <li>Insurers may not nonrenew a policy solely based on the insured's <b>age</b>.</li>
+      </ul>
+
+      <h4>3. Liability Policies Issued to Public Entities</h4>
+      <p>A liability policy naming a local public entity or state agency as the insured can't be cancelled, or have renewal declined, for reasons other than nonpayment unless notice is mailed:</p>
+      <ul>
+      <li>At least <b>45 days</b> before the effective date of <b>nonrenewal</b>, or</li>
+      <li>At least <b>60 days</b> before the effective date of <b>cancellation</b>.</li>
+      </ul>
+      <p>No such notice is needed if a renewal notice stating the new premium was already sent <b>at least 45 days</b> before cancellation/expiration.</p>
+
+      <h4>4. Homeowners &amp; Financed Policies</h4>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">A homeowners policy <b>cannot</b> be cancelled/nonrenewed solely because the policyholder operates a <b>family home day care</b> at the insured location &mdash; <b>unless</b>: material misrepresentation of fact; the risk changed substantially since issuance; nonpayment of premium; or the insurer no longer writes homeowners policies at all.</div></div>
+      <p><b>Financed insurance:</b> a lender may not cancel a policy for the insured's default under a premium payment loan agreement until the lender gives the insured <b>10 days'</b> notice of cancellation.</p>
+    </section>
+
+    <section class="topic" id="ch4-6">
+      <div class="topic-header"><span class="topic-index">VI</span><h3 class="topic-title">Auto Repair Facility Referral Rules</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.0 min</span></div>
+        <audio controls preload="none" src="audio/ch4_part6.m4a"></audio>
+      </div>
+      <p><span class="code">(CIC 753)</span></p>
+
+      <h4>1. Prohibited Insurer Conduct</h4>
+      <p>Insurers are prohibited from:</p>
+      <ul>
+      <li>Requiring that a vehicle be repaired at a specific shop;</li>
+      <li>Suggesting or recommending a specific repair shop; or</li>
+      <li>Requiring a claimant to travel an unreasonable distance to inspect a replacement vehicle, get an estimate, or have the vehicle repaired.</li>
+      </ul>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc"><b>Exception:</b> a referral is fine if the claimant <b>expressly requested</b> it after being informed of their right to choose their own shop.</div></div>
+
+      <h4>2. If a Recommendation Is Made</h4>
+      <p>If the claimant accepts a recommended shop, the vehicle must be restored to its pre-loss condition at <b>no additional cost</b> to the claimant beyond what the policy/law otherwise requires.</p>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc">If the recommendation is made <b>orally</b>, the insurer must send the required written disclosure within <b>5 calendar days</b>, printed in no less than <b>10-point type</b>.</div></div>
+      <p>Required statement: <i>"We are prohibited by law from requiring that repairs be done at a specific automotive repair dealer. You are entitled to select the auto body repair shop to repair damage covered by us. We have recommended an automotive repair dealer that will repair your damaged vehicle. If you agree to use our recommended automotive repair dealer, we will cause the damaged vehicle to be restored to its condition prior to the loss at no additional cost to you other than as stated in the insurance policy or as otherwise allowed by law. If you experience a problem with the repair of your vehicle, please contact us immediately for assistance."</i></p>
+    </section>
+
+    <div class="final-traps topic" id="ch4-7">
+      <div class="topic-header"><span class="topic-index">VII</span><h3 class="topic-title">Highest-Yield Trap Summary</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.1 min</span></div>
+        <audio controls preload="none" src="audio/ch4_part7.m4a"></audio>
+      </div>
+      <ul>
+      <li>No insurable interest = <b>void contract</b> (CIC 280); property needs interest at <b>inception AND loss</b> but not continuously in between (CIC 286) &mdash; life/health only needs it at inception.</li>
+      <li>A mere <b>expectant/contingent interest</b> with no actual right or valid contract is <b>NOT</b> insurable interest (CIC 283).</li>
+      <li>Standard Fire Policy voids for <b>willful</b> concealment/fraud, before or after a loss &mdash; note the "willful" qualifier vs. general concealment doctrine (no intent needed).</li>
+      <li>"Order of civil authority" is excluded <b>except</b> destruction to stop a fire's spread.</li>
+      <li><b>60+ consecutive days</b> vacant/unoccupied suspends fire coverage.</li>
+      <li>Standard fire policy time limits: <b>60 days</b> proof of loss &middot; <b>15 days</b> document production &middot; <b>20/15 days</b> appraiser/umpire selection &middot; <b>30 days</b> company's repair/replace election &middot; <b>60 days</b> loss payable &middot; <b>12 months</b> to sue.</li>
+      <li><b>No abandonment</b> of property to the insurer is ever allowed.</li>
+      <li>RRGs assume/spread <b>liability</b> risk themselves; PGs just pool members to <b>buy</b> liability coverage &mdash; neither can tap CA's insolvency guarantee fund.</li>
+      <li><b>Valued policy</b> = value fixed at issuance (e.g., ocean marine cargo); <b>open policy</b> = value set at time of loss.</li>
+      <li><b>Insured's address is NOT required</b> in a property policy (CIC 2071) &mdash; separate trap from the CIC 381 "financial rating not required" rule in Ch. 1.</li>
+      <li>Auto cancellation: <b>20 days</b> standard, <b>10 days</b> for nonpayment. Public-entity liability policies: <b>45 days</b> (nonrenewal) / <b>60 days</b> (cancellation).</li>
+      <li>Homeowners policy can't be dropped solely for running a <b>family day care</b> &mdash; only for misrepresentation, substantially changed risk, nonpayment, or insurer exiting the line.</li>
+      <li>Insurers can <b>never require</b> a specific repair shop, only recommend one <b>if asked</b> &mdash; oral recommendations need written disclosure within <b>5 days</b>.</li>
       </ul>
     </div>
   </section>
