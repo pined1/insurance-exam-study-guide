@@ -108,6 +108,7 @@
   .nav-group[data-accent="3"]{ --accent-local:#ff9500; }
   .nav-group[data-accent="4"]{ --accent-local:#30b0c7; }
   .nav-group[data-accent="5"]{ --accent-local:#5856d6; }
+  .nav-group[data-accent="6"]{ --accent-local:#ff2d55; }
   .nav-link{
     display:block; padding:8px 10px; margin:1px 0; border-radius:9px;
     color:var(--text); text-decoration:none; font-size:13.5px;
@@ -168,6 +169,7 @@
   .chapter[data-accent="3"]{ --accent-local:#ff9500; }
   .chapter[data-accent="4"]{ --accent-local:#30b0c7; }
   .chapter[data-accent="5"]{ --accent-local:#5856d6; }
+  .chapter[data-accent="6"]{ --accent-local:#ff2d55; }
   .chapter-divider{
     display:flex; align-items:center; gap:14px; margin:50px 0 30px;
   }
@@ -329,6 +331,11 @@
       <a class="nav-link" href="#ch5-6">VI. Personal Auto &mdash; Liability &amp; UM Coverage</a>
       <a class="nav-link" href="#ch5-7">VII. Trap Summary</a>
     </div>
+    <div class="nav-group" data-accent="6">
+      <div class="nav-chapter-title">Chapter 6</div>
+      <a class="nav-link" href="#ch6-1">I. Workers Compensation &mdash; General Concepts</a>
+      <a class="nav-link" href="#ch6-2">II. Trap Summary</a>
+    </div>
   </nav>
   <button class="theme-toggle" id="themeToggle">&#127765; Theme: System</button>
 </aside>
@@ -341,8 +348,8 @@
     <h1>Study Guide</h1>
     <p class="hero-sub">Property &amp; Casualty &middot; Personal Lines &middot; Life Insurance &amp; Annuities</p>
     <div class="hero-stats">
-      <div class="stat"><b>5</b><span>Chapters</span></div>
-      <div class="stat"><b>29</b><span>Sections</span></div>
+      <div class="stat"><b>6</b><span>Chapters</span></div>
+      <div class="stat"><b>31</b><span>Sections</span></div>
       <div class="stat"><b>~44 min</b><span>Audio</span></div>
     </div>
   </header>
@@ -1689,6 +1696,90 @@
       <li>Auto cancellation is valid for only <b>5 specific reasons</b>; a <b>20-day</b> window to correct a misrepresentation avoids cancellation (premium difference still owed).</li>
       <li>CA minimum auto liability limits jumped to <b>30/60/15</b> effective <b>1/1/2025</b> (from 15/30/5).</li>
       <li><b>UM coverage is mandatory to offer, not to carry</b> &mdash; once rejected, it stays rejected through renewals unless the insured re-adds it.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CHAPTER 6 -->
+  <!-- ============================================================ -->
+  <section class="chapter" id="chapter-6" data-accent="6">
+    <div class="chapter-divider"><div class="line"></div></div>
+    <div class="chapter-label">Chapter 6</div>
+    <h2 class="chapter-title">Workers Compensation</h2>
+    <p class="chapter-desc">The rating bureau and State Fund structure, employers liability coverage, and 24-hour coverage requirements.</p>
+
+    <section class="topic" id="ch6-1">
+      <div class="topic-header"><span class="topic-index">I</span><h3 class="topic-title">Workers Compensation &mdash; General Concepts</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~1.6 min</span></div>
+        <audio controls preload="none" src="audio/ch6_part1.m4a"></audio>
+      </div>
+
+      <h4>1. California Workers Compensation Inspection Rating Bureau <span class="code">(CIC 11750.3)</span></h4>
+      <p>The <b>WCIRB</b> is an unincorporated, nonprofit association comprised of all companies licensed to transact workers compensation insurance in California &mdash; it has over <b>400 member companies</b>.</p>
+      <p>Its main functions:</p>
+      <ul>
+      <li>Provide reliable statistics and rating information regarding Workers Compensation and employer's liability insurance</li>
+      <li>Collect and tabulate information/statistics to develop pure premium rates submitted to the Commissioner for issuance or approval</li>
+      <li>Inspect risks for classification or rate purposes and furnish this information to the insurer (and to the employer, upon request)</li>
+      </ul>
+
+      <h4>2. California State Compensation Insurance Fund <span class="code">(CIC 11784)</span></h4>
+      <p>California operates the <b>State Compensation Insurance Fund (State Fund / SCIF)</b>, but there is also open competition for workers comp insurance among commercial insurers.</p>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc"><b>SCIF is now the insurer of last resort.</b> Large employers with the financial ability to pay premiums are being turned away (or even asked to withdraw) from SCIF, unless they can show they can't obtain coverage in the commercial marketplace. Priority now goes to smaller employers with limited payrolls, regardless of whether they've shopped the open market.</div></div>
+
+      <h5>Rate-Setting Factors</h5>
+      <p>SCIF's Board of Directors sets the rates charged by the Fund. Rates must be fixed within each class of business, considering:</p>
+      <ul>
+      <li>Bodily risk or safety, premises, or work hazard for each insured employer</li>
+      <li>The manner in which the work is conducted</li>
+      <li>A reasonable regard for the accident experience of each insured</li>
+      <li>A reasonable regard for the means and methods of caring for injured persons by each insured</li>
+      </ul>
+      <div class="callout trap"><span class="ci">&#9888;&#65039;</span><div class="cc">Rates may <b>NOT</b> take into account whether employees have persons dependent on them for support.</div></div>
+
+      <p>Very small employers are no longer required to prove that at least <b>three insurers</b> declined to cover them. Certain employers regulated under the <b>U.S. Longshore and Harbor Workers' Compensation Act</b> (rather than state WC law) may also obtain coverage from SCIF as well as commercial insurers.</p>
+      <p>Employers not eligible to self-insure must obtain the insurance. An employer who fails to do so is subject to a <b>cease and desist order</b> from the Department of Industrial Relations, closing the business until coverage is obtained.</p>
+      <div class="callout num"><span class="ci">&#128290;</span><div class="cc">The <b>California Insurance Guarantee Association</b> pays claims of insolvent insurers, but only limited resources are available to employees who should've been covered and weren't &mdash; and the <b>employer is personally liable</b> for such claims.</div></div>
+
+      <h4>3. Employers Liability Coverage <span class="code">(CIC 11750.1f)</span></h4>
+      <p>Under the compulsory Workers Compensation law, injured employees are barred from seeking damages outside WC law &mdash; the <b>exclusive remedy doctrine</b>. But some situations fall outside WC coverage, and <b>Employers Liability</b> coverage is designed for exactly those. Most common covered situations:</p>
+      <ul>
+      <li>Exempt or illegal employment</li>
+      <li>Third-party-over claims &mdash; an employee successfully sues a third party, and that third party then sues the employer</li>
+      <li>Situations involving another relationship between employer and employee, called <b>dual capacity</b></li>
+      </ul>
+      <p><i>Example: an employee is instructed to make repairs using tools the employer manufactures, and is injured because of the tools. The employee can collect both Workers Compensation benefits AND additional compensation for being injured by a tool the employer manufactured.</i></p>
+      <ul>
+      <li>Family loss of consortium, or loss of companionship, resulting from an employee's disability or death</li>
+      <li>Consequential bodily injury to an employee's family members, resulting from the employee's injury</li>
+      <li>Employees who attempt to seek benefits from parent-subsidiary relationships of the employer</li>
+      </ul>
+      <p><i>Example: an employee is injured by a company (subsidiary) that is actually owned by another company (parent). The employee may collect Workers Compensation from the subsidiary AND seek additional compensation from the parent company.</i></p>
+
+      <h4>4. 24-Hour Coverage <span class="code">(CIC 1749.02)</span></h4>
+      <p><b>24-hour coverage</b> provides employees with both a workers compensation policy and some type of medical insurance coverage (a disability income policy, health care service plan contract for injuries, etc.). Because the employee is covered at work by workers compensation, and during non-work hours by the medical plan, the worker is covered 24 hours a day.</p>
+      <div class="callout know"><span class="ci">&#128161;</span><div class="cc">Same 2-policy structure covered in <b>Ch. 3 &sect;I</b> &mdash; 24-hour coverage is never a single policy, and it may never be distributed using a life insurance policy.</div></div>
+    </section>
+
+    <div class="final-traps topic" id="ch6-2">
+      <div class="topic-header"><span class="topic-index">II</span><h3 class="topic-title">Trap Summary</h3></div>
+      <div class="audio-card">
+        <span class="icon">&#127911;</span>
+        <div class="meta"><b>Listen</b><span>~0.8 min</span></div>
+        <audio controls preload="none" src="audio/ch6_part2.m4a"></audio>
+      </div>
+      <ul>
+      <li><b>WCIRB</b> is a nonprofit rating bureau (400+ member companies) &mdash; it sets pure premium rate data for Commissioner approval and inspects risks; it doesn't insure anyone itself.</li>
+      <li><b>SCIF is the insurer of last resort</b> &mdash; large employers who can get coverage commercially are steered away from it; priority goes to small employers.</li>
+      <li>SCIF rates <b>cannot</b> factor in whether employees have dependents &mdash; but CAN factor in bodily risk/hazard, work manner, accident experience, and care methods.</li>
+      <li>Very small employers no longer need to show 3 insurers declined them before using SCIF.</li>
+      <li>Failing to obtain required WC coverage &rarr; a <b>cease and desist order</b> closing the business, plus personal employer liability for uncovered claims.</li>
+      <li><b>Employers Liability</b> plugs the gaps the exclusive remedy doctrine leaves open: illegal/exempt employment, third-party-over suits, dual capacity, loss of consortium, family consequential injury, and parent-subsidiary claims.</li>
+      <li><b>Dual capacity example:</b> hurt by a tool your employer manufactured &rarr; WC benefits AND product-liability-style compensation.</li>
+      <li><b>24-hour coverage</b> = WC policy + separate medical/disability policy, together &mdash; never a single policy, never via life insurance (same rule from Ch. 3).</li>
       </ul>
     </div>
   </section>
