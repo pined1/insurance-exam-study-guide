@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Practice Exam &mdash; Insurance Exam Study Guide</title>
+<style>
+  :root{
+    --bg:#f5f5f7;
+    --bg-elevated:#ffffff;
+    --bg-inset:#f0f0f2;
+    --text:#1d1d1f;
+    --text-secondary:#6e6e73;
+    --border:rgba(0,0,0,0.08);
+    --accent:#0071e3;
+    --shadow:0 1px 2px rgba(0,0,0,0.04), 0 10px 30px rgba(0,0,0,0.06);
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.06);
+    --radius-lg:22px;
+    --radius-md:16px;
+    --radius-sm:10px;
+    --correct-bg:#e8f8ee;   --correct-border:#34c759; --correct-text:#146c34;
+    --wrong-bg:#fdecec;     --wrong-border:#ff3b30;  --wrong-text:#7a1410;
+    --selected-bg:#e9e9eb;
+    --topbar-bg:rgba(245,245,247,0.85);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#000000; --bg-elevated:#1c1c1e; --bg-inset:#161618;
+      --text:#f5f5f7; --text-secondary:#98989d; --border:rgba(255,255,255,0.1);
+      --shadow:0 1px 2px rgba(0,0,0,0.4), 0 10px 30px rgba(0,0,0,0.5);
+      --shadow-sm:0 1px 3px rgba(0,0,0,0.4);
+      --correct-bg:rgba(52,199,89,0.16);  --correct-text:#6cd97e;
+      --wrong-bg:rgba(255,69,58,0.14);    --wrong-text:#ff8a80;
+      --selected-bg:#2c2c2e;
+      --topbar-bg:rgba(22,22,24,0.85);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#000000; --bg-elevated:#1c1c1e; --bg-inset:#161618;
+    --text:#f5f5f7; --text-secondary:#98989d; --border:rgba(255,255,255,0.1);
+    --shadow:0 1px 2px rgba(0,0,0,0.4), 0 10px 30px rgba(0,0,0,0.5);
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.4);
+    --correct-bg:rgba(52,199,89,0.16);  --correct-text:#6cd97e;
+    --wrong-bg:rgba(255,69,58,0.14);    --wrong-text:#ff8a80;
+    --selected-bg:#2c2c2e;
+    --topbar-bg:rgba(22,22,24,0.85);
+  }
+
+  *{ box-sizing:border-box; -webkit-font-smoothing:antialiased; }
+  html{ overflow-x:hidden; }
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+    line-height:1.5; font-size:15.5px; overflow-x:hidden;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:calc(14px + env(safe-area-inset-top,0px)) 20px 14px;
+    background:var(--topbar-bg);
+    -webkit-backdrop-filter:blur(20px) saturate(1.6); backdrop-filter:blur(20px) saturate(1.6);
+    border-bottom:1px solid var(--border);
+  }
+  .topbar a.back{
+    color:var(--accent); text-decoration:none; font-size:14px; font-weight:600;
+    display:flex; align-items:center; gap:4px; white-space:nowrap;
+  }
+  .topbar .title{ font-size:15px; font-weight:700; text-align:center; flex:1; }
+  .theme-toggle-mini{
+    border:1px solid var(--border); background:var(--bg-inset); color:var(--text);
+    border-radius:10px; padding:7px 10px; font-size:12px; font-weight:600; cursor:pointer;
+    font-family:inherit; white-space:nowrap;
+  }
+
+  .progress-track{ height:4px; background:var(--bg-inset); }
+  .progress-fill{ height:100%; background:var(--accent); transition:width .2s ease; }
+
+  main{ max-width:680px; margin:0 auto; padding:22px 20px 80px; }
+
+  .exam-header{ margin-bottom:18px; }
+  .exam-header h1{ font-size:24px; font-weight:800; margin:0 0 4px; letter-spacing:-.01em; }
+  .exam-header p{ margin:0; color:var(--text-secondary); font-size:13.5px; }
+
+  .score-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    margin:14px 0 22px; padding:12px 14px; background:var(--bg-elevated);
+    border:1px solid var(--border); border-radius:var(--radius-sm); box-shadow:var(--shadow-sm);
+    font-size:13px; flex-wrap:wrap;
+  }
+  .score-row b{ font-size:15px; }
+  .score-row .actions{ display:flex; gap:8px; }
+  .score-row button{
+    border:1px solid var(--border); background:var(--bg-inset); color:var(--text);
+    border-radius:8px; padding:6px 10px; font-size:12px; font-weight:600; cursor:pointer; font-family:inherit;
+  }
+
+  .q-label{ font-size:13px; color:var(--text-secondary); margin-bottom:6px; font-weight:600; }
+  .q-text{ font-size:18px; font-weight:600; line-height:1.4; margin:0 0 20px; }
+
+  .choices{ display:flex; flex-direction:column; gap:10px; }
+  .choice{
+    display:flex; align-items:center; gap:12px;
+    background:var(--bg-elevated); border:1px solid var(--border);
+    border-radius:var(--radius-sm); padding:14px 16px; cursor:pointer;
+    box-shadow:var(--shadow-sm); transition:background .15s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .choice:active{ background:var(--bg-inset); }
+  .choice.selected{ background:var(--selected-bg); }
+  .choice .radio{
+    width:20px; height:20px; border-radius:50%; border:2px solid var(--text-secondary);
+    flex:none; position:relative;
+  }
+  .choice.selected .radio{ border-color:var(--text); }
+  .choice.selected .radio::after{
+    content:""; position:absolute; inset:3px; border-radius:50%; background:var(--text);
+  }
+  .choice .ctext{ flex:1; font-size:15px; }
+  .choice .result-icon{
+    flex:none; width:26px; height:26px; border-radius:50%;
+    display:none; align-items:center; justify-content:center; color:#fff; font-size:14px; font-weight:800;
+  }
+  .choice.correct{ background:var(--correct-bg); }
+  .choice.correct .result-icon{ display:flex; background:var(--correct-border); }
+  .choice.incorrect .result-icon{ display:flex; background:var(--wrong-border); }
+  fieldset.answered .choice{ cursor:default; }
+  fieldset.answered .choice:active{ background:inherit; }
+  fieldset.answered .choice.correct{ background:var(--correct-bg); }
+
+  .submit-row{ display:flex; justify-content:flex-end; margin:20px 0 0; }
+  .submit-btn{
+    border:1.5px solid var(--accent); color:var(--accent); background:transparent;
+    border-radius:10px; padding:12px 22px; font-size:13px; font-weight:700;
+    letter-spacing:.04em; text-transform:uppercase; cursor:pointer; font-family:inherit;
+  }
+  .submit-btn:disabled{ border-color:var(--border); color:var(--text-secondary); cursor:not-allowed; }
+  .submit-btn:not(:disabled):active{ background:var(--accent); color:#fff; }
+
+  .rationale{ margin-top:28px; }
+  .rationale h3{ font-size:13px; color:var(--text-secondary); margin:0 0 10px; font-weight:600; }
+  .rationale-card{
+    display:none; background:var(--bg-elevated); border:1px solid var(--border);
+    border-radius:var(--radius-md); padding:18px 18px; box-shadow:var(--shadow-sm);
+  }
+  .rationale-card.show{ display:block; }
+  .rationale-status{ display:flex; align-items:center; gap:10px; margin-bottom:12px; font-size:14px; }
+  .rationale-status .dot{
+    width:24px; height:24px; border-radius:50%; flex:none; color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;
+  }
+  .rationale-status.correct .dot{ background:var(--correct-border); }
+  .rationale-status.incorrect .dot{ background:var(--wrong-border); }
+  .rationale-status .verdict{ font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:12px; }
+  .rationale-status.correct .verdict{ color:var(--correct-text); }
+  .rationale-status.incorrect .verdict{ color:var(--wrong-text); }
+  .rationale-text{ font-size:14.5px; color:var(--text); margin:0; }
+
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:28px;
+  }
+  .nav-btn{
+    border:1px solid var(--border); background:var(--bg-elevated); color:var(--text);
+    border-radius:10px; padding:12px 18px; font-size:13.5px; font-weight:600; cursor:pointer;
+    font-family:inherit; box-shadow:var(--shadow-sm);
+  }
+  .nav-btn:disabled{ opacity:.4; cursor:not-allowed; }
+
+  .jump-grid{
+    display:flex; flex-wrap:wrap; gap:8px; margin-top:26px; padding-top:22px; border-top:1px solid var(--border);
+  }
+  .jump-dot{
+    width:34px; height:34px; border-radius:9px; border:1px solid var(--border);
+    background:var(--bg-elevated); color:var(--text-secondary); font-size:12.5px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; font-family:inherit;
+  }
+  .jump-dot.current{ border-color:var(--accent); border-width:2px; color:var(--accent); }
+  .jump-dot.done-correct{ background:var(--correct-bg); color:var(--correct-text); border-color:transparent; }
+  .jump-dot.done-incorrect{ background:var(--wrong-bg); color:var(--wrong-text); border-color:transparent; }
+
+  .end-card{
+    display:none; text-align:center; padding:40px 20px; background:var(--bg-elevated);
+    border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow);
+  }
+  .end-card.show{ display:block; }
+  .end-card .big{ font-size:40px; font-weight:800; margin:0 0 6px; }
+  .end-card p{ color:var(--text-secondary); margin:0 0 20px; }
+  .end-card button{
+    border:1.5px solid var(--accent); color:#fff; background:var(--accent);
+    border-radius:10px; padding:12px 24px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit;
+  }
+
+  @media (max-width:480px){
+    .topbar{ padding-left:14px; padding-right:14px; }
+    .topbar .title{ font-size:13.5px; }
+    main{ padding:18px 14px 70px; }
+    .q-text{ font-size:16.5px; }
+    .choice{ padding:12px 13px; gap:10px; }
+    .choice .ctext{ font-size:14px; }
+    .exam-header h1{ font-size:21px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back" href="index.html">&larr; Study Guide</a>
+  <div class="title">Practice Exam</div>
+  <button class="theme-toggle-mini" id="themeToggle">&#127765;</button>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+<main>
+  <div class="exam-header">
+    <h1>Practice Exam &mdash; Learning Mode</h1>
+    <p>Pick an answer, submit, and read the rationale before moving on. Your progress is saved on this device.</p>
+  </div>
+
+  <div class="score-row">
+    <div><b id="scoreText">0 / 0</b> answered correctly</div>
+    <div class="actions">
+      <button id="shuffleBtn">Shuffle</button>
+      <button id="resetBtn">Reset Progress</button>
+    </div>
+  </div>
+
+  <div id="quizArea">
+    <div class="q-label" id="qLabel">Question 1 of 29</div>
+    <p class="q-text" id="qText"></p>
+
+    <fieldset class="choices" id="choices" style="border:none; margin:0; padding:0;"></fieldset>
+
+    <div class="submit-row">
+      <button class="submit-btn" id="submitBtn" disabled>Submit Answer</button>
+    </div>
+
+    <div class="rationale">
+      <h3>Rationale</h3>
+      <div class="rationale-card" id="rationaleCard">
+        <div class="rationale-status" id="rationaleStatus">
+          <div class="dot" id="rationaleDot"></div>
+          <div>Your answer: <span class="verdict" id="rationaleVerdict"></span></div>
+        </div>
+        <p class="rationale-text" id="rationaleText"></p>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn" id="prevBtn">&larr; Previous</button>
+      <button class="nav-btn" id="nextBtn">Next &rarr;</button>
+    </div>
+
+    <div class="jump-grid" id="jumpGrid"></div>
+  </div>
+
+  <div class="end-card" id="endCard">
+    <p class="big" id="endScore">0 / 29</p>
+    <p>You've been through every question. Review any you missed using the grid above, or start over.</p>
+    <button id="restartBtn">Restart Exam</button>
+  </div>
+</main>
+
+<script>
+const QUESTIONS = [
+  {
+    "q": "Which of the following is NOT covered under Plan A in Medigap insurance?",
+    "choices": [
+      "The 20% Part B coinsurance amounts for Medicare approved services",
+      "The Medicare Part A deductible",
+      "Approved hospital costs for 365 additional days after Medicare benefits end",
+      "The first three pints of blood each year"
+    ],
+    "answer": 1,
+    "rationale": "Medicare Supplement Plan A provides the core, or basic, benefits established by law. All of the above are part of the basic benefits, except for the Medicare Part A deductible, which is a benefit offered through nine other plans."
+  },
+  {
+    "q": "Any person who engages in any unfair method of competition or deceptive act is liable to the state for a civil penalty and a fine of $5,000 for each act. In addition, if it is determined that the act is willful the fine will NOT exceed",
+    "choices": [
+      "$50,000.",
+      "$10,000.",
+      "$25,000.",
+      "$5,000."
+    ],
+    "answer": 1,
+    "rationale": "As dictated by CIC 790.035 the penalty for engaging in unfair trade practices is $5,000 for each act. In addition, if it is determined that the violation was willful, the penalty shall be $10,000 for each act."
+  },
+  {
+    "q": "All of the following would be considered rebating EXCEPT",
+    "choices": [
+      "An agent offers to share their commission with a policyholder.",
+      "An agent offers tickets to a baseball game as an inducement to buy insurance.",
+      "An agent misrepresents policy benefits to convince a policyowner to replace policies.",
+      "An agent offers the use of their lake house to a client as an inducement to buy an insurance policy."
+    ],
+    "answer": 2,
+    "rationale": "Rebating occurs when an insured is offered something of value in order to induce the sale of an insurance product. Both the offer and acceptance of a rebate are illegal."
+  },
+  {
+    "q": "Jack and Jill each own a 50% interest in a dwelling that is insured under a standard fire policy issued to Jill to cover her interest in the structure. The amount of insurance is $40,000. Following a $10,000 fire loss to the structure, Jill will receive",
+    "choices": [
+      "Nothing.",
+      "$10,000.",
+      "$2,500.",
+      "$5,000."
+    ],
+    "answer": 3,
+    "rationale": "Because Jill's interest in the property is 50%, she will receive an amount equal to 50% of the loss."
+  },
+  {
+    "q": "When is an insurance license considered inactive?",
+    "choices": [
+      "When renewal fees are not paid",
+      "When it's a temporary license",
+      "When no company appointment is in effect for the license",
+      "When the agent is not conducting business with the general public"
+    ],
+    "answer": 2,
+    "rationale": "When a licensee has an in force license, but is not appointed by an insurer as their agent, the license is inactive."
+  },
+  {
+    "q": "Representations are written or oral statements made by the applicant which",
+    "choices": [
+      "Are guaranteed to be true.",
+      "Are considered true to the best of the applicant's knowledge.",
+      "Are found to be false after further investigation.",
+      "Are immaterial to the actual acceptability of the insurance contract."
+    ],
+    "answer": 1,
+    "rationale": "Representations are statements made by an applicant which they believe to be true."
+  },
+  {
+    "q": "The Commissioner of Insurance supervises and regulates the insurance affairs in the State of California, and is chosen by",
+    "choices": [
+      "Admitted insurers.",
+      "The people.",
+      "The State Senate.",
+      "The Governor."
+    ],
+    "answer": 1,
+    "rationale": "The Commissioner is elected at the same time that other State officials are chosen."
+  },
+  {
+    "q": "How many days do insurers have to accept or deny an insurance claim?",
+    "choices": [
+      "30 days",
+      "15 days",
+      "90 days",
+      "40 days"
+    ],
+    "answer": 3,
+    "rationale": "Once the claim is received, insurers must either accept or deny it within 40 calendar days."
+  },
+  {
+    "q": "Which entity pursues liquidation of an insolvent insurer?",
+    "choices": [
+      "The local government of the city in which the insurer is located",
+      "The attorneys of the insolvent insurer",
+      "The state government",
+      "The federal government"
+    ],
+    "answer": 2,
+    "rationale": "Insurance companies are specifically exempted under federal bankruptcy laws, which means that any liquidation of an insolvent insurer is strictly a matter for the state to pursue."
+  },
+  {
+    "q": "Of the following, which is NOT considered a general duty or power of State Insurance Commissioners?",
+    "choices": [
+      "Issue, suspend, and revoke insurance licenses and certificates of authority.",
+      "Oversee the Department of Insurance.",
+      "Conduct investigations and examinations of companies and individuals who conduct the business of insurance.",
+      "Develop and implement laws to regulate the business of insurance."
+    ],
+    "answer": 3,
+    "rationale": "Laws are developed by the State Legislature, the Commissioner enforces the laws."
+  },
+  {
+    "q": "Which type of insurance includes the assumption of a contractual obligation to reimburse the insured against all or a portion of the fees, costs, and expenses related to or arising out of services performed by or under the supervision of an attorney who is an active member of the bar of any jurisdiction or jurisdictions of the United States?",
+    "choices": [
+      "Errors and omission insurance",
+      "Professional liability insurance",
+      "Contract insurance",
+      "Legal insurance"
+    ],
+    "answer": 3,
+    "rationale": "Legal insurance includes the assumption of a contractual obligation to reimburse the insured against all or a portion of his fees, costs, and expenses related to or arising out of services performed by or under the supervision of an attorney who is an active member of the bar of any jurisdiction or jurisdictions of the United States, in which these legal services are performed."
+  },
+  {
+    "q": "An insurer that holds a Certificate of Authority in the state in which it transacts business is considered a/an",
+    "choices": [
+      "Certified insurer.",
+      "Authorized insurer.",
+      "Local insurer.",
+      "Self-insurer."
+    ],
+    "answer": 1,
+    "rationale": "Insurers who meet the state's financial requirements and hold a Certificate of Authority to transact business in the state are considered authorized or admitted."
+  },
+  {
+    "q": "An insurer submits a rate plan to the Commissioner's office on the first of the month and immediately implements this new rate plan the next day prior to receiving the Commissioner's approval. This type of rate plan is known as",
+    "choices": [
+      "Use and File.",
+      "Open Competition.",
+      "Prior Approval.",
+      "File and Use."
+    ],
+    "answer": 3,
+    "rationale": "File-and-use laws require that the rate plan be filed prior to marketing the plan; however, such laws provide that once the plan is filed, the insurer does not have to wait for Commissioner approval to begin marketing the plan."
+  },
+  {
+    "q": "Which of the following best describes a misrepresentation?",
+    "choices": [
+      "Making a deceptive or untrue statement about a person engaged in the insurance business",
+      "Issuing sales material with exaggerated statements about policy benefits",
+      "Discriminating among individuals of the same insuring class",
+      "Making a maliciously critical statement that is intended to injure another person"
+    ],
+    "answer": 1,
+    "rationale": "Misrepresentation is issuing, publishing or circulating any illustration or sales material that is false, misleading or deceptive as to policy benefits or terms, the payment of dividends, etc. This includes oral statements."
+  },
+  {
+    "q": "Under California law, an insurance solicitor is a natural person employed to aid a(n):",
+    "choices": [
+      "Insurance adjuster.",
+      "Insurance administrator.",
+      "Life agent.",
+      "Insurance agent or broker."
+    ],
+    "answer": 3,
+    "rationale": "An insurance solicitor is an individual employed by a licensed agent or broker, not an insurance company."
+  },
+  {
+    "q": "Within how many days of termination of employment must an employer give notice of the employee's right to convert the group policy to an individual policy?",
+    "choices": [
+      "31 days",
+      "25 days",
+      "5 days",
+      "15 days"
+    ],
+    "answer": 3,
+    "rationale": "The employer or the insurer must give the employee notice of their right to convert to individual coverage within 15 days of termination of employment (or at least 15 days prior to the expiration date of the conversion period)."
+  },
+  {
+    "q": "An insurer publishes intimidating brochures that portray the insurer's competition as financially and professionally unstable. Which of the following best describes this act?",
+    "choices": [
+      "Illegal until endorsed by the Guaranty Association",
+      "Legal, provided that the information can be verified",
+      "Illegal under any circumstances",
+      "Legal, provided that the other insurers are paid royalties for the usage of their names"
+    ],
+    "answer": 2,
+    "rationale": "When a company criticizes the financial situation of another company with the intention of injuring that company, it has committed an illegal trade practice called defamation."
+  },
+  {
+    "q": "Forcing a client to buy insurance from a particular lender as a condition of granting a loan is defined as",
+    "choices": [
+      "Misleading advertising.",
+      "Defamation.",
+      "Rebating.",
+      "Coercion."
+    ],
+    "answer": 3,
+    "rationale": "These are all considered to be Unfair Trade Practices, which are major violations that can lead to heavy penalties. Coercion, for example, is when the bank won't give you an auto loan unless you agree to buy auto insurance from them."
+  },
+  {
+    "q": "Which of the following best describes the unfair trade practice of defamation?",
+    "choices": [
+      "Making derogatory oral statements about another insurer's financial condition",
+      "Refusing to deal with other insurers",
+      "Assuming the name and identity of another person",
+      "Issuing false advertising material"
+    ],
+    "answer": 0,
+    "rationale": "Making oral or written statements directly or indirectly which are derogatory or maliciously critical of another insurer would be an example of the unfair trade practice of defamation."
+  },
+  {
+    "q": "Which of the following best describes the insurer's liability for losses arising from military service?",
+    "choices": [
+      "The insurer is liable for all losses.",
+      "The insurer's liability may be reduced or excluded.",
+      "The insurer's liability is always excluded.",
+      "The insurer's liability is always reduced."
+    ],
+    "answer": 1,
+    "rationale": "The provision on war, military and aviation risk allows the insurer to reduce or exclude liability for losses resulting from war, military or naval service, and aviation."
+  },
+  {
+    "q": "Which of the following is NOT true regarding a Certificate of Authority?",
+    "choices": [
+      "It is equivalent to an insurance license.",
+      "It may be necessary for transacting insurance business in a specific state.",
+      "It is issued by the state department of insurance.",
+      "It is required for foreign and alien insurers only."
+    ],
+    "answer": 3,
+    "rationale": "Before any insurer may transact business in a specific state, they must obtain a Certificate of Authority from the state department of insurance and meet any financial (capital and surplus) requirements set down by the state."
+  },
+  {
+    "q": "The continuing education requirement for the California Partnership for Long-Term Care policies",
+    "choices": [
+      "Only needs to be completed if an actual sale occurs during that licensing period.",
+      "Must be completed in addition to an agent's regular continuing education requirements.",
+      "Does not apply to agents who hold a life license.",
+      "Is part of an agent's regular continuing education requirements."
+    ],
+    "answer": 3,
+    "rationale": "The continuing education requirements for the California Partnership for Long-Term Care policies are part of, NOT in addition to, an agent's regular continuing education requirement."
+  },
+  {
+    "q": "The agent's authority to transact insurance business for an insurer is effective",
+    "choices": [
+      "Upon the initial hiring date of the agent.",
+      "Once the Commissioner has given approval and the agency receives notice of such approval.",
+      "After the mandatory 60-day waiting period for all new agency contracts has expired.",
+      "As of the date that the notice of appointment is signed."
+    ],
+    "answer": 3,
+    "rationale": "According to CIC 1704a, an agent's authority to transact insurance business is effective as of the date the notice of appointment is signed."
+  },
+  {
+    "q": "The rating method which allows insurers to compete with one another by quickly changing rates without review by the state regulators is known as",
+    "choices": [
+      "Prior Approval.",
+      "Open Competition.",
+      "File and Use.",
+      "Use and File."
+    ],
+    "answer": 1,
+    "rationale": "The open method competition allows insurers to compete with one another by quickly changing rates in order to be more competitive in the marketplace."
+  },
+  {
+    "q": "Obtaining information under false pretenses is a violation. What would be the maximum fine for any agent found guilty?",
+    "choices": [
+      "$10,000",
+      "$30,000",
+      "$5,000",
+      "$20,000"
+    ],
+    "answer": 0,
+    "rationale": "The maximum dollar amount fined for obtaining information under false pretenses is $10,000. (CIC 791.22)"
+  },
+  {
+    "q": "All of the following may be covered under the Employers Liability policy EXCEPT",
+    "choices": [
+      "Consequential bodily injuries to a spouse of an employee.",
+      "Losses that occur as a result of dual capacity relationships between the employer and employee.",
+      "Exempt employees.",
+      "Employees eligible for 24-hour coverage."
+    ],
+    "answer": 3,
+    "rationale": "Employers Liability coverage is designed for situations in which employers need additional insurance for claims not covered under Workers Compensation laws. All of the scenarios described above would be covered except for the 24-hour coverage employees. 24-hour coverage provides employees with both a workers compensation policy and some type of medical insurance coverage."
+  },
+  {
+    "q": "Which amount is figured by subtracting depreciation from the replacement cost of a covered item?",
+    "choices": [
+      "Actual cash value",
+      "Repair cost",
+      "Pro rata percentage",
+      "Interest of the insured"
+    ],
+    "answer": 0,
+    "rationale": "The ACV of a property is the replacement cost of that property minus depreciation."
+  },
+  {
+    "q": "In property and casualty insurance, insurable interest is defined as the right of a person or entity to property in that such a loss to that property would cause a direct monetary loss to the person or entity. Which of the following statements is TRUE regarding insurable interest in property and casualty insurance?",
+    "choices": [
+      "The insurable interest must exist only at the time of application of insurance.",
+      "Insurable interest also includes indirect monetary loss to the person or entity.",
+      "Only the owner of the property has insurable interest.",
+      "If the insured has no insurable interest, the contract is void."
+    ],
+    "answer": 3,
+    "rationale": "The person or entity making a claim for the damaged property must have an insurable interest in the property. In most property insurance losses, the insured is the owner of the property. However, others might also have an insurable interest in the property; such as, a mortgagee has an insurable interest in real property to the extent of the outstanding mortgage."
+  },
+  {
+    "q": "Basic elements of the outline of coverage include all of the following EXCEPT",
+    "choices": [
+      "A statement concerning Alzheimer's disease coverage.",
+      "Renewal and termination provisions.",
+      "That an \"inflation guard\" is required.",
+      "A statement that long-term care is not Medicare supplement insurance."
+    ],
+    "answer": 2,
+    "rationale": "Based on the outline of coverage for an LTC policy, the insured will have a free look period to review all the policy provisions and decide to keep or return the policy for a refund. The outline includes that the cost of care will increase over time but that the benefits will not unless an inflation protection option is chosen, and it will include the renewal and termination provisions. A statement concerning Alzheimer's coverage and coverage for other cognitive impairments must be included as well."
+  }
+];
+
+(function(){
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('themeToggle');
+  var states = ['system','light','dark'];
+  var labels = {system:'&#127765;', light:'&#9728;&#65039;', dark:'&#127769;'};
+  var theme = 'system';
+  try { theme = localStorage.getItem('sg-theme') || 'system'; } catch(e){}
+  function applyTheme(t){
+    if(t==='system'){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme', t); }
+    themeBtn.innerHTML = labels[t];
+  }
+  applyTheme(theme);
+  themeBtn.addEventListener('click', function(){
+    theme = states[(states.indexOf(theme)+1) % states.length];
+    try { localStorage.setItem('sg-theme', theme); } catch(e){}
+    applyTheme(theme);
+  });
+
+  var ORDER_KEY = 'pe-order-v1';
+  var ANSWERS_KEY = 'pe-answers-v1';
+  var CURRENT_KEY = 'pe-current-v1';
+
+  var order = QUESTIONS.map(function(_, i){ return i; });
+  try {
+    var savedOrder = JSON.parse(localStorage.getItem(ORDER_KEY) || 'null');
+    if (savedOrder && savedOrder.length === QUESTIONS.length) order = savedOrder;
+  } catch(e){}
+
+  var answers = {};
+  try { answers = JSON.parse(localStorage.getItem(ANSWERS_KEY) || '{}'); } catch(e){}
+
+  var current = 0;
+  try { current = parseInt(localStorage.getItem(CURRENT_KEY) || '0', 10) || 0; } catch(e){}
+  if (current < 0 || current >= QUESTIONS.length) current = 0;
+
+  function persist(){
+    try {
+      localStorage.setItem(ORDER_KEY, JSON.stringify(order));
+      localStorage.setItem(ANSWERS_KEY, JSON.stringify(answers));
+      localStorage.setItem(CURRENT_KEY, String(current));
+    } catch(e){}
+  }
+
+  var qLabel = document.getElementById('qLabel');
+  var qText = document.getElementById('qText');
+  var choicesEl = document.getElementById('choices');
+  var submitBtn = document.getElementById('submitBtn');
+  var rationaleCard = document.getElementById('rationaleCard');
+  var rationaleStatus = document.getElementById('rationaleStatus');
+  var rationaleDot = document.getElementById('rationaleDot');
+  var rationaleVerdict = document.getElementById('rationaleVerdict');
+  var rationaleText = document.getElementById('rationaleText');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var jumpGrid = document.getElementById('jumpGrid');
+  var progressFill = document.getElementById('progressFill');
+  var scoreText = document.getElementById('scoreText');
+  var quizArea = document.getElementById('quizArea');
+  var endCard = document.getElementById('endCard');
+  var endScore = document.getElementById('endScore');
+
+  var pendingSelection = null;
+
+  function qid(pos){ return order[pos]; }
+
+  function computeScore(){
+    var correct = 0, answered = 0;
+    order.forEach(function(qi){
+      var a = answers[qi];
+      if (a && a.submitted){
+        answered++;
+        if (a.selected === QUESTIONS[qi].answer) correct++;
+      }
+    });
+    return { correct: correct, answered: answered };
+  }
+
+  function updateScoreRow(){
+    var s = computeScore();
+    scoreText.textContent = s.correct + ' / ' + s.answered;
+  }
+
+  function renderJumpGrid(){
+    jumpGrid.innerHTML = '';
+    order.forEach(function(qi, pos){
+      var btn = document.createElement('button');
+      btn.className = 'jump-dot';
+      btn.type = 'button';
+      btn.textContent = (pos+1);
+      var a = answers[qi];
+      if (pos === current) btn.classList.add('current');
+      if (a && a.submitted){
+        btn.classList.add(a.selected === QUESTIONS[qi].answer ? 'done-correct' : 'done-incorrect');
+      }
+      btn.addEventListener('click', function(){ goTo(pos); });
+      jumpGrid.appendChild(btn);
+    });
+  }
+
+  function renderQuestion(){
+    if (current >= QUESTIONS.length){
+      quizArea.style.display = 'none';
+      endCard.classList.add('show');
+      var s = computeScore();
+      endScore.textContent = s.correct + ' / ' + QUESTIONS.length;
+      progressFill.style.width = '100%';
+      return;
+    }
+    quizArea.style.display = '';
+    endCard.classList.remove('show');
+
+    var qi = qid(current);
+    var q = QUESTIONS[qi];
+    var saved = answers[qi];
+    pendingSelection = saved ? saved.selected : null;
+
+    qLabel.textContent = 'Question ' + (current+1) + ' of ' + QUESTIONS.length;
+    qText.textContent = q.q;
+
+    choicesEl.innerHTML = '';
+    choicesEl.classList.toggle('answered', !!(saved && saved.submitted));
+
+    q.choices.forEach(function(choiceText, idx){
+      var row = document.createElement('label');
+      row.className = 'choice';
+      row.innerHTML =
+        '<span class="radio"></span>' +
+        '<span class="ctext">' + String.fromCharCode(65+idx) + '. ' + choiceText + '</span>' +
+        '<span class="result-icon"></span>';
+
+      var isSubmitted = saved && saved.submitted;
+      var isSelected = pendingSelection === idx;
+      if (isSelected) row.classList.add('selected');
+
+      if (isSubmitted){
+        var icon = row.querySelector('.result-icon');
+        if (idx === q.answer){
+          row.classList.add('correct');
+          icon.textContent = '✓';
+        } else {
+          row.classList.add('incorrect');
+          icon.textContent = '✕';
+        }
+      } else {
+        row.addEventListener('click', function(){
+          pendingSelection = idx;
+          Array.prototype.forEach.call(choicesEl.children, function(c){ c.classList.remove('selected'); });
+          row.classList.add('selected');
+          submitBtn.disabled = false;
+        });
+      }
+      choicesEl.appendChild(row);
+    });
+
+    submitBtn.disabled = !(pendingSelection !== null && !(saved && saved.submitted));
+    submitBtn.style.display = (saved && saved.submitted) ? 'none' : '';
+
+    if (saved && saved.submitted){
+      showRationale(qi, saved.selected);
+    } else {
+      rationaleCard.classList.remove('show');
+    }
+
+    prevBtn.disabled = current === 0;
+    nextBtn.textContent = current === QUESTIONS.length - 1 ? 'Finish →' : 'Next →';
+
+    progressFill.style.width = ((current) / QUESTIONS.length * 100) + '%';
+    updateScoreRow();
+    renderJumpGrid();
+  }
+
+  function showRationale(qi, selected){
+    var q = QUESTIONS[qi];
+    var isCorrect = selected === q.answer;
+    rationaleCard.classList.add('show');
+    rationaleStatus.className = 'rationale-status ' + (isCorrect ? 'correct' : 'incorrect');
+    rationaleDot.textContent = isCorrect ? '✓' : '✕';
+    rationaleVerdict.textContent = isCorrect ? 'CORRECT' : 'INCORRECT';
+    rationaleText.textContent = q.rationale;
+  }
+
+  submitBtn.addEventListener('click', function(){
+    if (pendingSelection === null) return;
+    var qi = qid(current);
+    answers[qi] = { selected: pendingSelection, submitted: true };
+    persist();
+    renderQuestion();
+  });
+
+  function goTo(pos){
+    current = Math.max(0, Math.min(QUESTIONS.length, pos));
+    persist();
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  prevBtn.addEventListener('click', function(){ goTo(current - 1); });
+  nextBtn.addEventListener('click', function(){ goTo(current + 1); });
+
+  document.getElementById('shuffleBtn').addEventListener('click', function(){
+    if (!confirm('Shuffle question order? Your answers so far stay saved, just reordered.')) return;
+    for (var i = order.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i+1));
+      var tmp = order[i]; order[i] = order[j]; order[j] = tmp;
+    }
+    current = 0;
+    persist();
+    renderQuestion();
+  });
+
+  function resetAll(){
+    answers = {};
+    current = 0;
+    order = QUESTIONS.map(function(_, i){ return i; });
+    persist();
+    renderQuestion();
+  }
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    if (confirm('Clear all your answers and start over?')) resetAll();
+  });
+  document.getElementById('restartBtn').addEventListener('click', resetAll);
+
+  renderQuestion();
+})();
+</script>
+
+</body>
+</html>
